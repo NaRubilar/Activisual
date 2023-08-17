@@ -1,0 +1,7 @@
+{
+  "name": "Activisual",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
