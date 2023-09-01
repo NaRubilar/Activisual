@@ -16,7 +16,7 @@ import { Component } from '@angular/core';
       <ion-card class="ion-text-center input-outline-container ion-padding">
         <img alt="Nosotros" src="https://impulso06.com/wp-content/uploads/2023/02/Roles-dentro-de-un-equipo-de-trabajo.png" />
         <ion-card-header>
-            <ion-card-title>Nosotros</ion-card-title>
+            <ion-card-title class="titulo" >Nosotros</ion-card-title>
         </ion-card-header>
 
         <ion-card-content >
@@ -28,7 +28,7 @@ import { Component } from '@angular/core';
             saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
             labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
             <br>
-            <ion-checkbox>Themed checkbox</ion-checkbox>
+            <ion-checkbox>Acepta los términos y condiciones de uso</ion-checkbox>
             <br>
             <br>
             <ion-button>Comenzar</ion-button>

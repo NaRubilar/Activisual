@@ -16,7 +16,7 @@ import { PageTwoComponent } from './page-two.component';
         <ion-card class="ion-text-center input-outline-container ion-padding">
             <img alt="Nosotros" src="https://impulso06.com/wp-content/uploads/2023/02/Roles-dentro-de-un-equipo-de-trabajo.png" />
             <ion-card-header>
-                <ion-card-title>Nosotros</ion-card-title>
+                <ion-card-title class="titulo" >Nosotros</ion-card-title>
             </ion-card-header>
 
             <ion-card-content >

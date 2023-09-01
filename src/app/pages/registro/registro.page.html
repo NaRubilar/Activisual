@@ -1,33 +1,31 @@
-<ion-header  [translucent]="true">
-  <ion-toolbar class="barra" >
-    <ion-title class=" ion-text-center">Registrate Aquí</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar class="barra" collapse="condense" >
+    <ion-title class=" ion-text-center" size="default" >Registrate Aquí</ion-title>
   </ion-toolbar>
 </ion-header>
 <br>
 <br>
-<ion-content class=" ion-text-center" [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title class=" ion-text-center" size="large">Registrate Aquí</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <br>
+<ion-content class=" ion-text-center" [fullscreen]="true">
+
 
   <ion-card class=" ion-text-center">
     <ion-card-header>
       <ion-card-title class=" ion-text-center titulo" size="large" ><h1>¡Únete a Activisual!</h1> </ion-card-title>
     </ion-card-header>
-
+    <br>
     <ion-card-content>
       <ion-input label="Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario"></ion-input>
       <br>
       <ion-input label="Ingrese Correo" type="email" label-placement="floating" fill="solid" placeholder="Correo"></ion-input>
       <br>
-      <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="solid" placeholder="Contraseña"></ion-input>
+      <ion-input label="Ingrese Telefono" type="tel" label-placement="floating" fill="solid" placeholder="Telefono"></ion-input>
+      <br>
+      <ion-input label="Ingrese Fecha de Nacimiento" type="date"  label-placement="floating" fill="solid" placeholder="Fecha de Nacimiento"></ion-input>
+      <br>
+      <ion-input label="Ingrese Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Contraseña"></ion-input>
       <br>
       <ion-input label="Repetir Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Repetir Contraseña"></ion-input>
-      <br>
     </ion-card-content>
 
     <ion-button class=" ion-justify-content-center" >Crear Cuenta</ion-button>
