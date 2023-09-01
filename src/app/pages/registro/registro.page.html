@@ -1,35 +1,39 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>registro</ion-title>
+<ion-header  [translucent]="true">
+  <ion-toolbar class="barra" >
+    <ion-title class=" ion-text-center">Registrate Aquí</ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
+<br>
+<br>
+<ion-content class=" ion-text-center" [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">registro</ion-title>
+      <ion-title class=" ion-text-center" size="large">Registrate Aquí</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <br>
 
-  <ion-card>
+  <ion-card class=" ion-text-center">
     <ion-card-header>
-      <ion-card-title>Registro</ion-card-title>
-      <ion-card-subtitle></ion-card-subtitle>
+      <ion-card-title class=" ion-text-center titulo" size="large" ><h1>¡Únete a Activisual!</h1> </ion-card-title>
     </ion-card-header>
-  
+
     <ion-card-content>
-      <ion-input label=" Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario"></ion-input>
+      <ion-input label="Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario"></ion-input>
       <br>
-      <ion-input label=" Ingrese Correo" type="email" label-placement="floating" fill="solid" placeholder="Correo"></ion-input>
+      <ion-input label="Ingrese Correo" type="email" label-placement="floating" fill="solid" placeholder="Correo"></ion-input>
       <br>
       <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="solid" placeholder="Contraseña"></ion-input>
       <br>
-      <ion-input label=" Repetir Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Repetir Contraseña"></ion-input>
+      <ion-input label="Repetir Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Repetir Contraseña"></ion-input>
       <br>
     </ion-card-content>
-  
-    <ion-button fill="clear">Registrarse</ion-button>
-    <ion-button fill="clear">Ingresa como invitado</ion-button>
+
+    <ion-button class=" ion-justify-content-center" >Crear Cuenta</ion-button>
+    <br>
+    <ion-button class=" ion-align-items-center" fill="clear">Login</ion-button>
+
+
   </ion-card>
 </ion-content>
