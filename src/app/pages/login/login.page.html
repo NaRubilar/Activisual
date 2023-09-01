@@ -1,14 +1,16 @@
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <br>
-    <ion-toolbar>
-      <ion-title class="ion-text-center" size="large">Bienvenido!</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div>
+    <ion-header collapse="condense">
+      <br>
+      <ion-toolbar>
+        <ion-title class="ion-text-center" size="large">Bienvenido!</ion-title>
+      </ion-toolbar>
+    </ion-header>
+  </div>
   <ion-card color="light">
     <img alt="Silhouette of mountains" size="small" src="https://p1.pxfuel.com/preview/48/98/565/photographer-series-beach-photograph.jpg" />
     <ion-card-header>
-      <ion-card-title class="ion-text-center">Inicio Sesión</ion-card-title>
+      <ion-card-title class="ion-text-center" aria-setsize="midium">Inicio Sesión</ion-card-title>
       <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
 
@@ -18,11 +20,12 @@
       <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
       <div class="container" style="margin: 0 auto;">
         <ion-button fill="clear" size="small">¿Olvidaste tu contraseña?</ion-button>
+        &nbsp;&nbsp; <ion-button  size="midium">Registrarse</ion-button>
       </div> 
     </ion-card-content>
   
     <ion-button fill="clear">Registrarse</ion-button>
-    <ion-button fill="clear">Ingresa como invitado</ion-button>
+    <ion-button fill="clear">Ingresa como</ion-button>
     <br>
     
   </ion-card>
