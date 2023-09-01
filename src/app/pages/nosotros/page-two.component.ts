@@ -10,7 +10,7 @@ import { PageThreeComponent } from './page-three.component';
         <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>Page Two</ion-title>
+        <ion-title>Nosotros</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -18,7 +18,7 @@ import { PageThreeComponent } from './page-three.component';
         <ion-card class=" ion-text-center input-outline-container ion-padding">
             <img alt="Nosotros" src="https://impulso06.com/wp-content/uploads/2023/02/Roles-dentro-de-un-equipo-de-trabajo.png" />
             <ion-card-header>
-                <ion-card-title>Nosotros</ion-card-title>
+                <ion-card-title>Lo que usamos</ion-card-title>
             </ion-card-header>
 
             <ion-card-content >

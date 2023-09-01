@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
         <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>Page Three</ion-title>
+        <ion-title>Nosotros</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -27,7 +27,10 @@ import { Component } from '@angular/core';
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
             saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
             labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
-
+            <br>
+            <ion-checkbox>Themed checkbox</ion-checkbox>
+            <br>
+            <br>
             <ion-button>Comenzar</ion-button>
         </ion-card-content>
       </ion-card>
