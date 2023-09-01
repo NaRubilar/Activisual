@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large"></ion-title>
+      <ion-title size="large">Login</ion-title>
     </ion-toolbar>
   </ion-header>
   <br>
@@ -16,7 +16,7 @@
   <br>
   <ion-card>
     <ion-card-header>
-      <ion-card-title>Inicio Sesión</ion-card-title>
+      <ion-card-title size="medium">Inicio Sesión</ion-card-title>
       <ion-card-subtitle></ion-card-subtitle>
     </ion-card-header>
   
@@ -24,10 +24,19 @@
       <ion-input label=" Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario"></ion-input>
       <br>
       <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="solid" placeholder="Contraseña"></ion-input>
+      <div class="container" style="margin: 0 auto;">
+        <ion-button fill="clear" size="small">¿Olvidaste tu contraseña?</ion-button>
+      </div>
     </ion-card-content>
-  
+    
+    
+    <br>
+    <br>
     <ion-button fill="clear">Registrarse</ion-button>
     <ion-button fill="clear">Ingresa como invitado</ion-button>
+    <br>
+    
   </ion-card>
   
+
 </ion-content>
