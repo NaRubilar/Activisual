@@ -7,7 +7,7 @@ import { PageTwoComponent } from './page-two.component';
   template: `
 
     <ion-header>
-        <ion-toolbar>
+        <ion-toolbar >
             <ion-title>Nosotros</ion-title>
         </ion-toolbar>
     </ion-header>
