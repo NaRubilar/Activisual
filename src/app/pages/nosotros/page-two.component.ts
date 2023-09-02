@@ -16,12 +16,14 @@ import { PageThreeComponent } from './page-three.component';
 
     <ion-content>
         <ion-card class=" ion-text-center input-outline-container ion-padding">
-            <img alt="Nosotros" src="https://impulso06.com/wp-content/uploads/2023/02/Roles-dentro-de-un-equipo-de-trabajo.png" />
+
             <ion-card-header>
                 <ion-card-title class="titulo" >Lo que usamos</ion-card-title>
             </ion-card-header>
+            <div class="linea"></div>
 
             <ion-card-content >
+            <img src="assets/img/mapa.png" alt="">
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
                 saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
                 labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
@@ -29,6 +31,7 @@ import { PageThreeComponent } from './page-three.component';
                 <ion-button>GPS</ion-button>
                 <br>
                 <br>
+            <img class="photo" src="assets/img/camera.png" alt="">
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
                 saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
                 labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
@@ -40,14 +43,21 @@ import { PageThreeComponent } from './page-three.component';
                 <br>
 
             <ion-nav-link router-direction="forward" [component]="component">
-                <ion-button>Siguiente</ion-button>
+              <ion-button id="top-center" shape="round" size="small">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+              </ion-button>
             </ion-nav-link>
 
             </ion-card-content>
         </ion-card>
     </ion-content>
   `,
+  styles: ['.linea { border-top: 1px solid black; height: 2px; max-width: 300px; padding: 0; margin: 0px auto 0 auto; }' ,
+           '.titulo { color: #08474e; font-weight: bold; display: inline-block; size: 10px; font-size: xx-large;; }',
+           'img{ width: 80%; height: 80%; }',
+           '.photo{ width: 90%; height: 90%; }']
 })
 export class PageTwoComponent {
   component = PageThreeComponent;
 }
+
