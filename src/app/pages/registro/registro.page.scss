@@ -7,8 +7,28 @@ barra{
 .titulo {
     color: rgb(0, 0, 0);
     font-weight: bold;
-    display: inline-block;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    width: 100%;
 }
 
+.photo{
+    width: 90%;
+    height: 90%;
+    vertical-align: text-top;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+icono{
+    left: 100px;
+}
+
+.linea {
+    border-top: 1px solid black;
+    height: 2px;
+    max-width: 300px;
+    padding: 0;
+    margin: 50px auto 0 auto;
+}

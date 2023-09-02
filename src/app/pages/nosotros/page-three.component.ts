@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-one',
@@ -31,7 +32,7 @@ import { Component } from '@angular/core';
             <ion-checkbox>Acepta los términos y condiciones de uso</ion-checkbox>
             <br>
             <br>
-            <ion-button>Comenzar</ion-button>
+            <ion-button class=" ion-align-items-center" (click)="alLogin()">Comenzar</ion-button>
         </ion-card-content>
       </ion-card>
 
@@ -39,4 +40,12 @@ import { Component } from '@angular/core';
     </ion-content>
   `,
 })
-export class PageThreeComponent {}
+export class PageThreeComponent {
+
+  constructor(private router: Router) { }
+
+
+  alLogin(){
+    this.router.navigate(['/login'])
+  }
+}
