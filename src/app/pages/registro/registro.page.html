@@ -4,9 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class=" ion-text-center" [fullscreen]="true">
+<ion-content class=" ion-text-center" color="light" [fullscreen]="true">
 
-  <ion-card class=" ion-text-center">
+  <ion-card class=" ion-text-center" >
     <ion-card-header >
       <img class="photo" src="assets/img/reg_1.png" alt="">
       <ion-card-title class=" ion-text-center titulo" size="large" ><h1>¡Únete a Activisual!</h1> </ion-card-title>
@@ -29,15 +29,15 @@
     <div class="linea"></div>
     <h4 ><span>Registrate con:</span></h4>
 
-    <ion-col align-self-center size="4">
+    <ion-col class="ion-align-items-center" style="justify-content: space-between;" align-self-center size="3">
       &nbsp;
-      <ion-button expand="block" shape="round" color="light" class=" ion-justify-content-center"> <div><ion-icon name="logo-google" ></ion-icon ></div> Continuar con Google</ion-button>
+      <ion-button  button shape="round" color="light" class="ion-justify-content-center text-center" style="font-size: 16px; width: 90%;"> <ion-icon slot="start" name="logo-google" style="justify-content: space-between;"></ion-icon > Continuar con Google</ion-button>
       &nbsp;
-      <ion-button expand="block" shape="round" color="success" class=" ion-justify-content-center "> <div> <ion-icon class="icono" name="logo-facebook"></ion-icon></div> Continuar con Facebook</ion-button>
+      <ion-button shape="round" color="success" class="ion-justify-content-center" style="font-size: 16px; width: 90%;"> <ion-icon slot="start" name="logo-facebook"></ion-icon> Continuar con Facebook</ion-button>
       &nbsp;
-      <ion-button expand="block" shape="round" color="dark" class=" ion-justify-content-center"> <div> <ion-icon name="logo-apple"></ion-icon> </div> Continuar con Apple</ion-button>
+      <ion-button shape="round" color="dark" class="ion-justify-content-center" style="font-size: 16px; width: 90%;"> <ion-icon slot="start" name="logo-apple"></ion-icon> Continuar con Apple</ion-button>
+      &nbsp;
     </ion-col>
-
 
   </ion-card>
 </ion-content>
