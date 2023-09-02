@@ -1,30 +1,28 @@
-<ion-header [translucent]="true">
+<ion-content [fullscreen]="true">
+
+<ion-header collapse="condense">
+  <br>
   <ion-toolbar>
-    <ion-title>login</ion-title>
+    <ion-title class="ion-text-center"  >Bienvenido!</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large"></ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <br>
-  <br>
-  <br>
-  <br>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Inicio Sesión</ion-card-title>
-      <ion-card-subtitle></ion-card-subtitle>
-    </ion-card-header>
+<ion-card color="light">
+  <img alt="Silhouette of mountains" size="small" src="https://p1.pxfuel.com/preview/48/98/565/photographer-series-beach-photograph.jpg" />
+  <ion-card-header>
+    <ion-card-title class="ion-text-center" aria-setsize="midium">Inicio Sesión</ion-card-title>
+    <ion-card-subtitle></ion-card-subtitle>
+  </ion-card-header>
 
-    <ion-card-content>
-      <ion-input label=" Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario"></ion-input>
-      <br>
-      <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="solid" placeholder="Contraseña"></ion-input>
-    </ion-card-content>
+  <ion-card-content>
+    <ion-input label="Ingrese Usuario" label-placement="floating" fill="outline" placeholder="Usuario"></ion-input>
+    <br>
+    <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
+    <div class="container" style="margin: 0 auto;">
+      <ion-button fill="clear" size="small">¿Olvidaste tu contraseña?</ion-button>
+      &nbsp;&nbsp; <ion-button  size="midium">Ingresar</ion-button>
+    </div> 
+  </ion-card-content>
 
     <ion-button fill="clear" (click)="alRegistro()">Registrarse</ion-button>
     <ion-button fill="clear">Ingresa como invitado</ion-button>

@@ -1,20 +1,90 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-menu contentId="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content class="ion-padding"> 
+    <ion-item button detail="false">
+      <ion-label>
+        <h3>Gestionar perfil</h3>
+        <p>Gestiona tu perfil, actualiza tus datos, revisa datos etc.</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button detail="false">
+      <ion-label>
+        <h3>Fotos más valoradas</h3>
+        <p>Revisa las fotos que recibieron una mayor valoración durante la semana</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button detail="false">
+      <ion-label>
+        <h3>Notificaciones</h3>
+        <p>Revisa las notificaciónes que puedes tener disponibles</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button detail="false">
+      <ion-label>
+        <h3>Regalar fotos</h3>
+        <p>Puedes regalar una de tus fotos a cualquier usuario registrado</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button detail="false">
+      <ion-label>
+        <h3>Ajustes</h3>
+        <p>Configura opciones de la aplicación, permisos y más.</p>
+      </ion-label>
+    </ion-item>
+    <ion-item button detail="false">
+      <ion-label>
+        <h3>Acerca de</h3>
+        <p>Informate sobre la aplicación y su funcionamiento </p>
+      </ion-label>
+    </ion-item>
+    <br>
+    <br>
+    <br>
+    <ion-item button detail="false">
+      <ion-label>
+        <h2>Cerrar Sesión</h2>
+      </ion-label>
+    </ion-item>
+  </ion-content>
+  </ion-menu>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menú</ion-title>
+    </ion-toolbar>
+    <ion-searchbar fill="clear"></ion-searchbar>
+    <br>
+    <br>
+    <br>
+    <ion-card>
+      <img alt="Silhouette of mountains" src="https://previews.123rf.com/images/microone/microone1710/microone171000015/87287631-mapa-isom%C3%A9trico-3d-con-pines-de-ubicaci%C3%B3n-fondo-de-vector-de-navegaci%C3%B3n-gps-ruta-en-el-navegador.jpg" />
+    </ion-card>
+  </ion-header>  
+  </div>
+  <div>
+    <ion-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col><ion-icon size="large" name="camera-outline"></ion-icon></ion-col>
+          <ion-col><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-col>
+          <ion-col><ion-icon name="rocket-outline" size="large"></ion-icon></ion-col>
+          <ion-col><ion-icon name="footsteps-outline" size="large"></ion-icon></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-content>
   </div>
 </ion-content>
+
+
+
+
+
