@@ -1,8 +1,7 @@
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-menu contentId="main-content">
+<ion-menu side="start" contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menú</ion-title>
+      <ion-title>Menu Content</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -49,40 +48,53 @@
       <ion-label>
         <h2>Cerrar Sesión</h2>
       </ion-label>
-    </ion-item>
+	</ion-item>
   </ion-content>
-  </ion-menu>
-
-  <div class="ion-page" id="main-content">
+</ion-menu>
+<div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-buttons slot="start">
+      <ion-title>Menu</ion-title>
+      <ion-buttons slot="end">
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
-      <ion-title>Menú</ion-title>
     </ion-toolbar>
-    <ion-searchbar fill="clear"></ion-searchbar>
-    <br>
-    <br>
-    <br>
-    <ion-card>
-      <img alt="Silhouette of mountains" src="https://previews.123rf.com/images/microone/microone1710/microone171000015/87287631-mapa-isom%C3%A9trico-3d-con-pines-de-ubicaci%C3%B3n-fondo-de-vector-de-navegaci%C3%B3n-gps-ruta-en-el-navegador.jpg" />
-    </ion-card>
+
   </ion-header>
-  </div>
-  <div>
-    <ion-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col><ion-icon size="large" name="camera-outline"></ion-icon></ion-col>
-          <ion-col><ion-icon name="person-circle-outline" size="large"></ion-icon></ion-col>
-          <ion-col><ion-icon name="rocket-outline" size="large"></ion-icon></ion-col>
-          <ion-col><ion-icon name="footsteps-outline" size="large"></ion-icon></ion-col>
-        </ion-row>
-      </ion-grid>
+  <div class="ion-page ion-padding"  id="main-content">
+    <ion-content class="ion-padding">
+      <ion-card id="Imgmap">
+        <img alt="Silhouette of mountains" src="https://previews.123rf.com/images/microone/microone1710/microone171000015/87287631-mapa-isom%C3%A9trico-3d-con-pines-de-ubicaci%C3%B3n-fondo-de-vector-de-navegaci%C3%B3n-gps-ruta-en-el-navegador.jpg" />
+      </ion-card>
+      <br>
+      <ion-fab slot="fixed" vertical="center" horizontal="start">
+        <ion-fab-button>
+          <ion-icon name="chevron-forward-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="end">
+          <ion-fab-button>
+            <ion-icon name="footsteps-outline" size="large"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="rocket-outline" size="large"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="person-circle-outline" size="large"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon size="3" name="camera-outline" size="large"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
     </ion-content>
   </div>
-</ion-content>
+</div>
+
+
+
+
+
+
 
 
 

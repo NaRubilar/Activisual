@@ -1,10 +1,7 @@
 #container {
   text-align: center;
-
-  position: absolute;
   left: 0;
   right: 0;
-  top: 50%;
   transform: translateY(-50%);
 }
 
@@ -47,6 +44,13 @@ ion-col {
   background-color: hsla(174, 73%, 80%, 0.29);
   border: solid 1px #fff;
   color: #070707;
-  text-align: center;
-  top: 220px;  
+  text-align: center; 
+}
+ion-fab {
+  top: 420px;
+  left: 45px;
+}
+
+#imgmap{
+  top: 220px;
 }
