@@ -15,10 +15,11 @@ import { Router } from '@angular/router';
 
     <ion-content>
       <ion-card class="ion-text-center input-outline-container ion-padding">
-        <img alt="Nosotros" src="https://impulso06.com/wp-content/uploads/2023/02/Roles-dentro-de-un-equipo-de-trabajo.png" />
+      <img src="assets/img/condition.png" alt="">
         <ion-card-header>
-            <ion-card-title class="titulo" >Nosotros</ion-card-title>
+            <ion-card-title class="titulo" >Términos y Condiciones</ion-card-title>
         </ion-card-header>
+        <div class="linea"></div>
 
         <ion-card-content >
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
@@ -33,12 +34,17 @@ import { Router } from '@angular/router';
             <br>
             <br>
             <ion-button class=" ion-align-items-center" (click)="alLogin()">Comenzar</ion-button>
+
+            
         </ion-card-content>
       </ion-card>
 
 
     </ion-content>
   `,
+  styles: ['.linea { border-top: 1px solid black; height: 2px; max-width: 300px; padding: 0; margin: 0px auto 0 auto; }' ,
+           '.titulo { color: #08474e; font-weight: bold; display: inline-block; size: 10px; font-size: xx-large;; }',
+           'img{ width: 80%; height: 80%; }']
 })
 export class PageThreeComponent {
 
