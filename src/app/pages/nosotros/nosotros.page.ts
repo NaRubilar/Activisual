@@ -8,13 +8,15 @@ import { PageOneComponent } from './page-one.component';
 
 })
 export class NosotrosPage implements OnInit {
-  component = PageOneComponent;
-
-  constructor() { }
-
-  ngOnInit() {
+  component = PageOneComponent
+  constructor() { 
   }
 
-
-
+  ngOnInit(){
+    
+  }
+ 
+  
 }
+
+
