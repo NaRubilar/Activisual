@@ -40,7 +40,7 @@ import { CheckboxCustomEvent } from '@ionic/angular';
                     <ng-template>
                       <ion-header>
                         <ion-toolbar>
-                          <ion-title class="ion-text-center">Modal</ion-title>
+                          <ion-title class="ion-text-center">Términos y Condiciones</ion-title>
                           <ion-buttons slot="end">
                             <ion-button (click)="modal.dismiss()" [routerLink]="['/login']">Aceptar</ion-button>
                           </ion-buttons>
@@ -130,7 +130,7 @@ import { CheckboxCustomEvent } from '@ionic/angular';
 export class PageThreeComponent {
   canDismiss = false;
   presentingElement = null!;
-  
+
   ngOnInit() {
     this.presentingElement = document.querySelector('.ion-page')!;
   }
