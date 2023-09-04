@@ -63,19 +63,31 @@ ion-fab {
 
 .botoncito1{
   position: absolute;
-  bottom: 85%;
+  bottom: 90%;
 }
 .botoncito2{
   position: absolute;
-  top: 70%;
+  top: 43%;
+  left: 8%;
 }
 .botoncito3{
   position: absolute;
-  top: 80%;
-  left: 50%;
+  top: 15%;
+  left: 40%;
 }
 .botoncito4{
   position: absolute;
   bottom: 55%;
-  left: 60%;
+  left: 52%;
+  top:50%;
 }
+
+.cartas{
+  margin: 0;
+}
+
+.paisaje{
+  width: 100%;
+  height: 100%;
+}
+

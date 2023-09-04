@@ -17,4 +17,8 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/registro'])
   }
 
+  alHome(){
+    this.router.navigate(['/home'])
+  }
+
 }
