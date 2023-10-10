@@ -13,17 +13,21 @@
     </ion-card-header>
 
     <ion-card-content>
-      <ion-input label="Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario"></ion-input>
-      <br>
-      <ion-input label="Ingrese Correo" type="email" label-placement="floating" fill="solid" placeholder="Correo"></ion-input>
 
-      <br>
-      <ion-input label="Ingrese Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Contraseña"></ion-input>
-      <br>
-      <ion-input label="Repetir Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Repetir Contraseña"></ion-input>
+      <form [formGroup]="formularioReg">
+
+        <ion-input label="Ingrese Usuario" label-placement="floating" fill="solid" placeholder="Usuario" formControlName="usuario"></ion-input>
+        <br>
+        <ion-input label="Ingrese Correo" type="email" label-placement="floating" fill="solid" placeholder="Correo" formControlName="correo"></ion-input>
+
+        <br>
+        <ion-input label="Ingrese Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Contraseña" formControlName="password"></ion-input>
+        <br>
+        <ion-input label="Repetir Contraseña" type="password"  label-placement="floating" fill="solid" placeholder="Repetir Contraseña" formControlName="repetirPassword" ></ion-input>
+      </form>
     </ion-card-content>
 
-    <ion-button class=" ion-justify-content-center" (click)="alHome()" >Crear Cuenta</ion-button>
+    <ion-button class=" ion-justify-content-center" (click)="guardar()" >Crear Cuenta</ion-button>
     <br>
     <ion-button class=" ion-align-items-center" fill="clear" [routerLink]="['/login']">Login</ion-button>
     <br>

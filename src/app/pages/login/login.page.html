@@ -3,7 +3,7 @@
 <ion-header collapse="condense">
   <br>
   <ion-toolbar>
-    <ion-title class="ion-text-center"  >Bienvenido!</ion-title>
+    <ion-title class="ion-text-center">Bienvenido!</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -15,15 +15,21 @@
   </ion-card-header>
 
   <ion-card-content>
-    <ion-input label="Ingrese Usuario" label-placement="floating" fill="outline" placeholder="Usuario"></ion-input>
-    <br>
-    <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Contraseña"></ion-input>
-    <div class="container" style="margin: 0 auto;">
-      <ion-button fill="clear" size="small">¿Olvidaste tu contraseña?</ion-button>
-      &nbsp;&nbsp; <ion-button  size="midium" (click)="alHome()">Ingresar</ion-button>
-    </div>
+
+    <form [formGroup]="formularioLogin" >
+
+      <ion-input label="Ingrese Usuario" label-placement="floating" fill="outline" placeholder="Usuario" formControlName="usuario"></ion-input>
+      <br>
+      <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Contraseña" formControlName="password"></ion-input>
+      <div class="container" style="margin: 0 auto;">
+        <ion-button fill="clear" size="small">¿Olvidaste tu contraseña?</ion-button>
+        &nbsp;&nbsp; <ion-button  size="midium" (click)="ingresar()">Ingresar</ion-button>
+      </div>
+
+    </form>
+
   </ion-card-content>
-    <ion-button fill="clear" (click)="alRegistro()">Registrarse</ion-button>
+    <ion-button fill="clear" [routerLink]="['/registro']">Registrarse</ion-button>
     <ion-button fill="clear">Ingresa como invitado</ion-button>
   </ion-card>
 
