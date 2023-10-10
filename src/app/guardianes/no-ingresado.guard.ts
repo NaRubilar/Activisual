@@ -11,8 +11,7 @@ export class NoIngresadoGuard implements CanActivate {
   constructor(public navCtrl: NavController){}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if(localStorage.getItem('ingresado')){
-        console.log('hola');
+      if(localStorage.getItem('Ingresado')){
         this.navCtrl.navigateRoot('home');
         return false;
       }else{
