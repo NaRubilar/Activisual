@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import {
   FormGroup,
@@ -19,7 +18,6 @@ export class RegistroPage implements OnInit {
   formularioReg: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private router: Router, 
               private alertController: AlertController,
               public navCtrl: NavController) {
 

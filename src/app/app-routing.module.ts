@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { NoIngresadoGuard } from './no-ingresado.guard';
-import { IngresadoGuard } from './ingresado.guard';
+import { NoIngresadoGuard } from './guardianes/no-ingresado.guard';
+import { IngresadoGuard } from './guardianes/ingresado.guard';
 
 const routes: Routes = [
   {

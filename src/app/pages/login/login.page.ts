@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import {
   FormGroup,
   FormControl,
@@ -18,7 +17,6 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private router: Router,
               private alertController: AlertController,
               public navCtrl: NavController) {
 
@@ -31,10 +29,6 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  alRegistro(){
-    this.router.navigate(['/registro'])
   }
 
 
