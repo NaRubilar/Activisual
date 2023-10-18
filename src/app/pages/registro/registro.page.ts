@@ -6,6 +6,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { Usuarios } from 'src/app/models/models';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 
 @Component({
@@ -19,7 +21,8 @@ export class RegistroPage implements OnInit {
 
   constructor(public fb: FormBuilder,
               private alertController: AlertController,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              private firestore: FirestoreService) {
 
     this.formularioReg = this.fb.group({
       'usuario': new FormControl("",Validators.required),
@@ -33,7 +36,14 @@ export class RegistroPage implements OnInit {
   ngOnInit() {
   }
 
-
+  public generaCadenaAleatoria(n: number): string {
+    let result = '';
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    for (let i = 0; i < n; i++){
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return result;
+  }
 
   async guardar(){
     var f = this.formularioReg.value;
@@ -48,15 +58,19 @@ export class RegistroPage implements OnInit {
       return;
     }
 
-    var usuarios = {
+    const usuarios: Usuarios = {
       usuario: f.usuario,
-      password: f.password
+      correo: f.correo,
+      password: f.password,
+      repetirPassword: f.repetirPassword
     }
+    const path = 'Usuarios'
+    var id: string =this.generaCadenaAleatoria(15);
 
-    localStorage.setItem('usuarios',JSON.stringify(usuarios));
+    this.firestore.createDoc(usuarios,path,id)
 
-    localStorage.setItem('Ingresado','true');
     this.navCtrl.navigateRoot('home');
+
 
   }
 
