@@ -6,6 +6,10 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
+import { Usuarios } from 'src/app/models/models';
+import { FirestoreService } from 'src/app/services/firestore.service';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 
 @Component({
   selector: 'app-login',
@@ -18,7 +22,9 @@ export class LoginPage implements OnInit {
 
   constructor(public fb: FormBuilder,
               private alertController: AlertController,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              private firestore: FirestoreService,
+              private firestoreAuth: AngularFireAuthModule) {
 
     this.formularioLogin = this.fb.group({
       'usuario': new FormControl("",Validators.required),
@@ -31,13 +37,35 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  /*
+  ingresar() {
+    const credenciales = {
+      email: this.cliente.email,
+      password: this.cliente.celular,
+    };
+    this.firebaseauthService.login(credenciales.email, credenciales.password).then( res => {
+         console.log('ingreso con exito');
+    });
+ }
+
 
   async ingresar(){
     var f = this.formularioLogin.value;
 
-    var usuarios = JSON.parse(localStorage.getItem('usuarios')!);
+    //comentario//
+    const user: Usuarios = {
+    usuario: "",
+    correo: "",
+    password: "",
+    repetirPassword: ""
+    }
+    
 
-    if(usuarios.usuario == f.usuario && usuarios.password == f.password){
+    
+    let usuarios:  Usuarios []= []
+    usuarios = this.firestore.getCollection('Usuarios')
+
+    if(this.usuarios.usuario == f.usuario && usuarios.password == f.password){
       console.log('Ingresado');
       localStorage.setItem('Ingresado','true');
       this.navCtrl.navigateRoot('home');
@@ -52,7 +80,7 @@ export class LoginPage implements OnInit {
 
 
 
-  }
+  }*/
 
 }
 
