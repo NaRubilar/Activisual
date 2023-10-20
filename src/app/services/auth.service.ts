@@ -21,6 +21,11 @@ export class AuthService {
     return this.auth.createUserWithEmailAndPassword(correo, password);
   }
 
+  resetPassword(correo: string): Promise<void> {
+    return this.auth.sendPasswordResetEmail(correo);
+  }
+
+
 
 
 

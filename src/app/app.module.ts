@@ -14,6 +14,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { NotFoundError } from 'rxjs';
+
 
 
 @NgModule({
@@ -22,4 +24,5 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+}

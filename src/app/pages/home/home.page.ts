@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AlertController, NavController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +11,7 @@ export class HomePage {
 
   constructor(private menuCtrl: MenuController,
               private alertController: AlertController,
-              public navCtrl: NavController,
-              private authService: AuthService) {}
+              public navCtrl: NavController) {}
 
   toggleMenu(){
     this.menuCtrl.toggle();
@@ -34,6 +32,7 @@ export class HomePage {
           text: 'Si',
           handler: () => {
             localStorage.removeItem('Ingresado');
+            console.log("Sesión Cerrada")
             this.navCtrl.navigateRoot('login');
           }
         }

@@ -5,12 +5,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
-import { Usuarios } from 'src/app/models/models';
-
 
 @Component({
   selector: 'app-login',
@@ -22,11 +18,10 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private alertController: AlertController,
               public navCtrl: NavController,
-              private firestore: FirestoreService,
-              private authFirebase: AngularFireAuth,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private loadingController: LoadingController,
+              private toastController: ToastController) {
 
     this.formularioLogin = this.fb.group({
       'correo': new FormControl("",Validators.required),
@@ -41,32 +36,47 @@ export class LoginPage implements OnInit {
 
 
   async ingresar() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    // console.log(this.email + this.password);
+    if (this.formularioLogin.valid) {
 
-    var f = this.formularioLogin.value;
+      //  await  loading.dismiss();
+      const user = await this.authService.login(this.formularioLogin.value.correo, this.formularioLogin.value.password).catch((err) => {
+        this.presentToast(err)
+        console.log(err);
+        loading.dismiss();
+      })
 
-    const usuarios: Usuarios = {
-      usuario: f.usuario,
-      correo: f.correo,
-      password: f.password,
-      repetirPassword: f.repetirPassword
+      if (user) {
+        loading.dismiss();
+        console.log('Ingresado');
+        localStorage.setItem('Ingresado','true');
+        this.navCtrl.navigateRoot('home');
+      }
+    } else {
+      loading.dismiss();
+      return console.log('Porfavor, Ingrese los datos correspondientes');
     }
 
-    const credenciales = {
-      correo: f.correo,
-      password: f.password,
-    };
+    }
+    get errorControl() {
+      return this.formularioLogin.controls;
+    }
 
-    var id = this.firestore.getId();
+    async presentToast(message: undefined) {
+      console.log(message);
 
-    const Usuarios = this.firestore.getDoc('Usuarios', id);
-    if(credenciales.correo === usuarios.correo && credenciales.password === usuarios.password){
-      console.log('Ingresado');
-      localStorage.setItem('Ingresado','true');
-      this.navCtrl.navigateRoot('home');
+      const toast = await this.toastController.create({
+        message: message,
+        duration: 1500,
+        position: 'top',
+      });
+
+      await toast.present();
     }
 
 
-
- }
 }
+
 
