@@ -38,10 +38,8 @@ export class LoginPage implements OnInit {
   async ingresar() {
     const loading = await this.loadingController.create();
     await loading.present();
-    // console.log(this.email + this.password);
     if (this.formularioLogin.valid) {
 
-      //  await  loading.dismiss();
       const user = await this.authService.login(this.formularioLogin.value.correo, this.formularioLogin.value.password).catch((err) => {
         this.presentToast(err)
         console.log(err);

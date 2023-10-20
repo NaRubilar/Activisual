@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AlertController, NavController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -9,14 +10,17 @@ import { AlertController, NavController } from '@ionic/angular';
 })
 export class HomePage {
 
+  usuario: any;
   constructor(private menuCtrl: MenuController,
               private alertController: AlertController,
-              public navCtrl: NavController) {}
+              public navCtrl: NavController,
+              private authService: AuthService) {}
 
-  toggleMenu(){
-    this.menuCtrl.toggle();
+  toggleMenu() {}
+
+  ngOnInit() {
+
   }
-
 
   async salir(){
 
@@ -42,6 +46,7 @@ export class HomePage {
     await alert.present();
 
   }
+
 
 
 }

@@ -11,7 +11,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RestablecerpasswordPage implements OnInit {
   correo:any
-  constructor(private authService:AuthService,
+  constructor(private authService: AuthService,
               public navCtrl: NavController) { }
 
   ngOnInit() {
