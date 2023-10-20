@@ -29,6 +29,7 @@
     "@capacitor/status-bar": "5.0.6",
     "@ionic/angular": "^7.0.0",
     "@popperjs/core": "^2.11.8",
+    "angularfire2": "^5.4.2",
     "firebase": "^10.5.0",
     "firebaseui": "^6.1.0",
     "ionicons": "^7.0.0",

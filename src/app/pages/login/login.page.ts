@@ -6,9 +6,10 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
-import { Usuarios } from 'src/app/models/models';
 import { FirestoreService } from 'src/app/services/firestore.service';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AuthService } from 'src/app/services/auth.service';
+import { Usuarios } from 'src/app/models/models';
 
 
 @Component({
@@ -24,10 +25,11 @@ export class LoginPage implements OnInit {
               private alertController: AlertController,
               public navCtrl: NavController,
               private firestore: FirestoreService,
-              private firestoreAuth: AngularFireAuthModule) {
+              private authFirebase: AngularFireAuth,
+              private authService: AuthService) {
 
     this.formularioLogin = this.fb.group({
-      'usuario': new FormControl("",Validators.required),
+      'correo': new FormControl("",Validators.required),
       'password': new FormControl("",Validators.required)
 
     })
@@ -37,50 +39,34 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  /*
-  ingresar() {
-    const credenciales = {
-      email: this.cliente.email,
-      password: this.cliente.celular,
-    };
-    this.firebaseauthService.login(credenciales.email, credenciales.password).then( res => {
-         console.log('ingreso con exito');
-    });
- }
 
+  async ingresar() {
 
-  async ingresar(){
     var f = this.formularioLogin.value;
 
-    //comentario//
-    const user: Usuarios = {
-    usuario: "",
-    correo: "",
-    password: "",
-    repetirPassword: ""
+    const usuarios: Usuarios = {
+      usuario: f.usuario,
+      correo: f.correo,
+      password: f.password,
+      repetirPassword: f.repetirPassword
     }
-    
 
-    
-    let usuarios:  Usuarios []= []
-    usuarios = this.firestore.getCollection('Usuarios')
+    const credenciales = {
+      correo: f.correo,
+      password: f.password,
+    };
 
-    if(this.usuarios.usuario == f.usuario && usuarios.password == f.password){
+    var id = this.firestore.getId();
+
+    const Usuarios = this.firestore.getDoc('Usuarios', id);
+    if(credenciales.correo === usuarios.correo && credenciales.password === usuarios.password){
       console.log('Ingresado');
       localStorage.setItem('Ingresado','true');
       this.navCtrl.navigateRoot('home');
-    }else{
-      const alert = await this.alertController.create({
-        message: 'Los datos ingresados no son correctos',
-        buttons: ['Aceptar']
-      });
-
-      await alert.present();
     }
 
 
 
-  }*/
-
+ }
 }
 

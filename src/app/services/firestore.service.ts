@@ -37,5 +37,9 @@ export class FirestoreService {
     return collection.valueChanges();
   }
 
+  getId() {
+    return this.firestore.createId();
+  }
+
 
 }
