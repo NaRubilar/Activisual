@@ -5,7 +5,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
+import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -17,11 +18,13 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private alertController: AlertController,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              private authService: AuthService,
+              private loadingController: LoadingController,
+              private toastController: ToastController) {
 
     this.formularioLogin = this.fb.group({
-      'usuario': new FormControl("",Validators.required),
+      'correo': new FormControl("",Validators.required),
       'password': new FormControl("",Validators.required)
 
     })
@@ -32,27 +35,48 @@ export class LoginPage implements OnInit {
   }
 
 
-  async ingresar(){
-    var f = this.formularioLogin.value;
+  async ingresar() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    // console.log(this.email + this.password);
+    if (this.formularioLogin.valid) {
 
-    var usuarios = JSON.parse(localStorage.getItem('usuarios')!);
+      //  await  loading.dismiss();
+      const user = await this.authService.login(this.formularioLogin.value.correo, this.formularioLogin.value.password).catch((err) => {
+        this.presentToast(err)
+        console.log(err);
+        loading.dismiss();
+      })
 
-    if(usuarios.usuario == f.usuario && usuarios.password == f.password){
-      console.log('Ingresado');
-      localStorage.setItem('Ingresado','true');
-      this.navCtrl.navigateRoot('home');
-    }else{
-      const alert = await this.alertController.create({
-        message: 'Los datos ingresados no son correctos',
-        buttons: ['Aceptar']
+      if (user) {
+        loading.dismiss();
+        console.log('Ingresado');
+        localStorage.setItem('Ingresado','true');
+        this.navCtrl.navigateRoot('home');
+      }
+    } else {
+      loading.dismiss();
+      return console.log('Porfavor, Ingrese los datos correspondientes');
+    }
+
+    }
+    get errorControl() {
+      return this.formularioLogin.controls;
+    }
+
+    async presentToast(message: undefined) {
+      console.log(message);
+
+      const toast = await this.toastController.create({
+        message: message,
+        duration: 1500,
+        position: 'top',
       });
 
-      await alert.present();
+      await toast.present();
     }
 
 
-
-  }
-
 }
+
 

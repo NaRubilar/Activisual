@@ -17,6 +17,7 @@ export class HomePage {
     this.menuCtrl.toggle();
   }
 
+
   async salir(){
 
     const alert = await this.alertController.create({
@@ -31,6 +32,7 @@ export class HomePage {
           text: 'Si',
           handler: () => {
             localStorage.removeItem('Ingresado');
+            console.log("Sesión Cerrada")
             this.navCtrl.navigateRoot('login');
           }
         }
@@ -40,5 +42,6 @@ export class HomePage {
     await alert.present();
 
   }
+
 
 }

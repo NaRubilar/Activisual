@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder
 } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 @Component({
@@ -18,8 +19,9 @@ export class RegistroPage implements OnInit {
   formularioReg: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private alertController: AlertController,
-              public navCtrl: NavController) {
+              public navCtrl: NavController,
+              private authService: AuthService,
+              private loadingController: LoadingController) {
 
     this.formularioReg = this.fb.group({
       'usuario': new FormControl("",Validators.required),
@@ -30,34 +32,31 @@ export class RegistroPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  async ngOnInit() {}
 
 
+    async guardar(){
+      const loading = await this.loadingController.create();
+      await loading.present();
+      if (this.formularioReg.valid) {
 
-  async guardar(){
-    var f = this.formularioReg.value;
+        const user = await this.authService.registrar(this.formularioReg.value.correo, this.formularioReg.value.password).catch((err) => {
+          console.log(err);
+          loading.dismiss();
+        })
 
-    if(this.formularioReg.invalid){
-      const alert = await this.alertController.create({
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar']
-      });
-
-      await alert.present();
-      return;
+        if (user) {
+          loading.dismiss();
+          console.log("Usuario Creado")
+          this.navCtrl.navigateRoot('home');
+        }
+      } else {
+        await loading.dismiss();
+        return console.log('Porfavor, Ingrese los datos correctamente');
+      }
     }
 
-    var usuarios = {
-      usuario: f.usuario,
-      password: f.password
-    }
 
-    localStorage.setItem('usuarios',JSON.stringify(usuarios));
 
-    localStorage.setItem('Ingresado','true');
-    this.navCtrl.navigateRoot('home');
-
-  }
 
 }
