@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
-import { FirestoreService } from 'src/app/services/firestore.service';
+
 import { ActivatedRoute } from '@angular/router';
+import { FirestoreService } from '../../services/firestore.service';
 
 
 @Component({
