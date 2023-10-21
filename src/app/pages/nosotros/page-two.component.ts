@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 
 import { PageThreeComponent } from './page-three.component';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
-@Component({
+@Component({ 
+  
   selector: 'app-page-two',
   template: `
     <ion-header>
@@ -36,7 +38,7 @@ import { PageThreeComponent } from './page-three.component';
                 saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
                 labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
                 <br>
-                <ion-button>Camara</ion-button>
+                <ion-button (click)="permisos()">Camara</ion-button>
                 <br>
                 <br>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
@@ -59,5 +61,9 @@ import { PageThreeComponent } from './page-three.component';
 })
 export class PageTwoComponent {
   component = PageThreeComponent;
+
+  permisos(){
+    Camera.requestPermissions();
+  }
 }
 

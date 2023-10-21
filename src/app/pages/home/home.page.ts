@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
 import { FirestoreService } from 'src/app/services/firestore.service';
+import { Console } from 'console';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,21 +17,24 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 export class HomePage {
 
   path: string = "TestImages";
-  photos: string[]= [];
+  photos: string[] = [];
+  fotoUrl: any;
 
 
   usuario: any;
+  imageSource: any;
+  storage: any;
 
   constructor(private menuCtrl: MenuController,
               private alertController: AlertController,
               public navCtrl: NavController,
               private authService: AuthService,
-              private firestore: FirestoreService) {}
+              private firestore: FirestoreService,
+              private router: Router) {}
 
   toggleMenu() {}
 
   ngOnInit() {
-    Camera.requestPermissions();
     this.getFotos();
   }
 
@@ -64,23 +69,35 @@ export class HomePage {
         const image = await Camera.getPhoto({
           quality: 50,
           allowEditing: false,
-          resultType: CameraResultType.Base64,
-          source: CameraSource.Camera
+          resultType: CameraResultType.Uri,
+          source: CameraSource.Camera,
+          saveToGallery: true
         });
 
+        /*
+        this.router.navigate(['/galeriafotos'], {
+          state: {
+            fotoUrl: image.webPath
+          }
+        });*/
+
         if(image){
-          this.guardarFoto(image.base64String!);
+          this.guardarFoto(this.storage.getCollection()); //image.base64String!
           this.getFotos();
+          console.log("Foto sacada");
+
         }
   };
 
+
   //==== Guardar Foto ====
   async guardarFoto(photo: string){
-    await Filesystem.writeFile({
+    const resp = await Filesystem.writeFile({
       path: this.path + '/Test3.jpg',
       data: photo,
       directory: Directory.Documents,
     });
+    console.log("Foto guardada");
   }
 
   getFotos() {
@@ -94,6 +111,7 @@ export class HomePage {
 
     }).catch(err => {
         console.log(err);
+        console.log("Error");
         Filesystem.mkdir(
           {
             path: this.path,
@@ -101,6 +119,7 @@ export class HomePage {
           }
         )
       })
+    console.log("Foto consegida (get)");
   }
 
   //==== Cargar Fotos ====
@@ -108,13 +127,13 @@ export class HomePage {
     photos.forEach(file => {
 
       Filesystem.readFile({
-        path: '${this.path}/${file.name}',
+        path: `${this.path}/${file.name}`,
         directory: Directory.Documents
       }).then(photo => {
         this.photos.push('data:image/jpeg;base64,' + photo.data);
       })
-    //PathLocationStrategy.forEach(photo => {
     });
+    console.log("Foto cargada");
   }
 
 }

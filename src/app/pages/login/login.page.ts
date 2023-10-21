@@ -5,7 +5,7 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -21,7 +21,9 @@ export class LoginPage implements OnInit {
               public navCtrl: NavController,
               private authService: AuthService,
               private loadingController: LoadingController,
-              private toastController: ToastController) {
+              private toastController: ToastController,
+              public formBuilder: FormBuilder,
+              public alertController: AlertController) {
 
     this.formularioLogin = this.fb.group({
       'correo': new FormControl("",Validators.required),
@@ -54,6 +56,13 @@ export class LoginPage implements OnInit {
       }
     } else {
       loading.dismiss();
+      const alert = await this.alertController.create({
+        header: 'Datos sin ingresar',
+        message: 'Porfavor, Ingrese los datos correspondientes',
+        buttons: ['OK']
+      });
+      await alert.present();
+
       return console.log('Porfavor, Ingrese los datos correspondientes');
     }
 
@@ -65,10 +74,10 @@ export class LoginPage implements OnInit {
     async presentToast(message: undefined) {
       console.log(message);
 
-      const toast = await this.toastController.create({
-        message: message,
-        duration: 1500,
-        position: 'top',
+      const toast = await this.alertController.create({
+        header: '',
+        message: 'Los datos que ingreso no son los correctos',
+        buttons: ['Volver a intentar']
       });
 
       await toast.present();
