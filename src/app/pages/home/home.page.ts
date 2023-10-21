@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { AlertController, NavController } from '@ionic/angular';
-import { AuthService } from 'src/app/services/auth.service';
+
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
-import { FirestoreService } from 'src/app/services/firestore.service';
+
 import { Console } from 'console';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import { FirestoreService } from '../../services/firestore.service';
 
 @Component({
   selector: 'app-home',
