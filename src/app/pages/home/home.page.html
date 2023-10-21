@@ -1,7 +1,7 @@
 <ion-menu side="start" contentId="main-content">
   <ion-header>
     <ion-toolbar>
-      <ion-title>Menu</ion-title>
+      <ion-title>{{usuario}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -100,155 +100,11 @@
             <ion-icon slot="icon-only" name="menu"></ion-icon>
         </ion-buttons>
       </ion-buttons>
-      <ion-title>Menu</ion-title>
+      <ion-title>Bienvenido usuario {{usuario}}</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div class="ion-page" style="padding-top: 30px;"  id="main-content">
-    <ion-content class="ion-padding">
-      <ion-card id="Imgmap">
-
-        <ion-button class="botoncito1" fill="clear" type="icon" id="top-center1" shape="round" size="small">
-          <ion-icon slot="icon-only" name="image"></ion-icon>
-        </ion-button>
-        <ion-popover trigger="top-center1" side="top" alignment="center">
-          <ng-template>
-            <ion-card class="cartas">
-              <img class="paisaje" alt="Placeres" src="assets/img/placeres.jpg" />
-              <ion-card-header class="ion-text-center">
-                <ion-card-title>Usuario_01</ion-card-title>
-                <ion-card-subtitle>Playa los Placeres</ion-card-subtitle>
-              </ion-card-header>
-
-              <ion-card-content>
-                <div class="ion-justify-content-center ion-text-center">
-                    <ion-button fill="clear" shape="round" >
-                      <ion-icon name="heart"></ion-icon>
-                    </ion-button>
-
-                    <ion-button fill="clear" shape="round" >
-                      <ion-icon name="person-add"></ion-icon>
-                    </ion-button>
-                </div>
-
-
-                <div>
-                  <ion-button class="ion-justify-content-center" expand="block" fill="clear" id="top-center" shape="round" size="small">
-                    <ion-icon name="chevron-down-outline"></ion-icon>
-                  </ion-button>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </ng-template>
-        </ion-popover>
-
-        <ion-button class="botoncito2" fill="clear" type="icon" id="top-center2" shape="round" size="small">
-          <ion-icon slot="icon-only" name="image"></ion-icon>
-        </ion-button>
-        <ion-popover trigger="top-center2" side="top" alignment="center">
-          <ng-template>
-            <ion-card class="cartas">
-              <img class="paisaje" alt="Polanco" src="assets/img/polanco.jpg" />
-              <ion-card-header>
-                <ion-card-title>Usuario_02</ion-card-title>
-                <ion-card-subtitle>Cerro Polanco</ion-card-subtitle>
-              </ion-card-header>
-
-                <ion-card-content>
-                  <div class="ion-justify-content-center ion-text-center">
-                      <ion-button fill="clear" shape="round" >
-                        <ion-icon name="heart"></ion-icon>
-                      </ion-button>
-
-                      <ion-button fill="clear" shape="round" >
-                        <ion-icon name="person-add"></ion-icon>
-                      </ion-button>
-                  </div>
-
-
-                  <div>
-                    <ion-button class="ion-justify-content-center" expand="block" fill="clear" id="top-center" shape="round" size="small">
-                      <ion-icon name="chevron-down-outline"></ion-icon>
-                    </ion-button>
-                  </div>
-                </ion-card-content>
-            </ion-card>
-          </ng-template>
-        </ion-popover>
-
-
-        <ion-button class="botoncito3" fill="clear" type="icon" id="top-center3" shape="round" size="small">
-          <ion-icon slot="icon-only" name="image"></ion-icon>
-        </ion-button>
-        <ion-popover trigger="top-center3" side="top" alignment="center">
-          <ng-template>
-            <ion-card class="cartas">
-              <img class="paisaje" alt="Conquista" src="assets/img/conquista.jpg" />
-              <ion-card-header>
-                <ion-card-title>Usuario_03</ion-card-title>
-                <ion-card-subtitle>Plaza la conquista</ion-card-subtitle>
-              </ion-card-header>
-
-                <ion-card-content>
-                  <div class="ion-justify-content-center ion-text-center">
-                      <ion-button fill="clear" shape="round" >
-                        <ion-icon name="heart"></ion-icon>
-                      </ion-button>
-
-                      <ion-button fill="clear" shape="round" >
-                        <ion-icon name="person-add"></ion-icon>
-                      </ion-button>
-                  </div>
-
-
-                  <div>
-                    <ion-button class="ion-justify-content-center" expand="block" fill="clear" id="top-center" shape="round" size="small">
-                      <ion-icon name="chevron-down-outline"></ion-icon>
-                    </ion-button>
-                  </div>
-                </ion-card-content>
-            </ion-card>
-          </ng-template>
-        </ion-popover>
-
-        <ion-button class="botoncito4" fill="clear" type="icon" id="top-center4" shape="round" size="small">
-          <ion-icon slot="icon-only" name="image"></ion-icon>
-        </ion-button>
-        <ion-popover trigger="top-center4" side="top" alignment="center">
-          <ng-template>
-            <ion-card class="cartas">
-              <img class="paisaje" alt="Quintil" src="assets/img/quintil.jpg" />
-              <ion-card-header>
-                <ion-card-title>Usuario_04</ion-card-title>
-                <ion-card-subtitle>Parque Quintil</ion-card-subtitle>
-              </ion-card-header>
-
-              <ion-card-content>
-                <div class="ion-justify-content-center ion-text-center">
-                    <ion-button fill="clear" shape="round" >
-                      <ion-icon name="heart"></ion-icon>
-                    </ion-button>
-
-                    <ion-button fill="clear" shape="round" >
-                      <ion-icon name="person-add"></ion-icon>
-                    </ion-button>
-                </div>
-
-
-                <div>
-                  <ion-button class="ion-justify-content-center" expand="block" fill="clear" id="top-center" shape="round" size="small">
-                    <ion-icon name="chevron-down-outline"></ion-icon>
-                  </ion-button>
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </ng-template>
-        </ion-popover>
-
-        <img type="image/png" style="width: 100%;" src="assets/img/mapafoto.png" alt="">
-
-      </ion-card>
-      <br>
+    <ion-content>
       <div>
         <ion-fab slot="fixed" vertical="bottom" horizontal="start">
           <ion-fab-button class="botonFab" >
@@ -261,19 +117,20 @@
             <ion-fab-button>
               <ion-icon name="rocket-outline" size="large"></ion-icon>
             </ion-fab-button>
+             <!--Galeria-->
             <ion-fab-button>
-              <ion-icon name="person-circle-outline" size="large"></ion-icon>
+              <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
             </ion-fab-button>
+            <!--Tomar Fotos-->
             <ion-fab-button>
-              <ion-icon size="3" name="camera-outline" size="large"></ion-icon>
+              <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
             </ion-fab-button>
           </ion-fab-list>
         </ion-fab>
       </div>
-
     </ion-content>
-  </div>
 </div>
+
 
 
 

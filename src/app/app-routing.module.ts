@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'nosotros',
+    redirectTo: 'inicio',
     pathMatch: 'full'
   },
 
@@ -39,13 +39,23 @@ const routes: Routes = [
     pathMatch: 'full'
   },
 
+  {
+    path: 'galeriafotos',
+    redirectTo: 'galeriafotos',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'inicio',
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
 
   {
     path: '**',
     redirectTo: 'notfoundpage',
     pathMatch: 'full'
   },
-
 
   {
     path: 'login',
@@ -69,6 +79,16 @@ const routes: Routes = [
     path: 'notfoundpage',
     loadChildren: () => import('./pages/notfoundpage/notfoundpage.module').then( m => m.NotfoundpagePageModule)
   },
+  {
+    path: 'galeriafotos',
+    loadChildren: () => import('./pages/galeriafotos/galeriafotos.module').then( m => m.GaleriafotosPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+
+
 
 
 

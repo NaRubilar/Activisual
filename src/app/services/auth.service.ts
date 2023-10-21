@@ -25,6 +25,14 @@ export class AuthService {
     return this.auth.sendPasswordResetEmail(correo);
   }
 
+  async getProfile() {
+    return await this.auth.currentUser
+  }
+
+  getUser() {
+    return this.auth.authState;
+  }
+
 
 
 
