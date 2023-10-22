@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController, NavController } from '@ionic/angular';
+import { AlertController, LoadingController, NavController } from '@ionic/angular';
 import {
   FormGroup,
   FormControl,
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { Usuarios } from 'src/app/models/models';
-import { FirestoreService } from 'src/app/services/firestore.service';
+import { AuthService } from '../../services/auth.service';
+
 
 
 @Component({
@@ -20,9 +20,10 @@ export class RegistroPage implements OnInit {
   formularioReg: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private alertController: AlertController,
               public navCtrl: NavController,
-              private firestore: FirestoreService) {
+              private authService: AuthService,
+              private loadingController: LoadingController,
+              public alertController: AlertController) {
 
     this.formularioReg = this.fb.group({
       'usuario': new FormControl("",Validators.required),
@@ -33,45 +34,39 @@ export class RegistroPage implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
-
-  public generaCadenaAleatoria(n: number): string {
-    let result = '';
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    for (let i = 0; i < n; i++){
-      result += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    return result;
-  }
+  async ngOnInit() {}
 
   async guardar(){
-    var f = this.formularioReg.value;
+    const loading = await this.loadingController.create();
+    await loading.present();
+    if (this.formularioReg.valid) {
 
-    if(this.formularioReg.invalid){
+      const user = await this.authService.registrar(this.formularioReg.value.correo, this.formularioReg.value.password).catch((err) => {
+        console.log(err);
+        loading.dismiss();
+      })
+
+      if (user) {
+        loading.dismiss();
+        console.log("Usuario Creado")
+        this.navCtrl.navigateRoot('home');
+      }
+    } else {
+      await loading.dismiss();
       const alert = await this.alertController.create({
-        message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar']
+        header: 'Datos sin ingresar',
+        message: 'Porfavor, Ingrese los datos correspondientes',
+        buttons: ['OK']
       });
-
       await alert.present();
-      return;
+      return console.log('Porfavor, Ingrese los datos correctamente');
     }
-
-    const usuarios: Usuarios = {
-      usuario: f.usuario,
-      correo: f.correo,
-      password: f.password,
-      repetirPassword: f.repetirPassword
-    }
-    const path = 'Usuarios'
-    var id: string =this.generaCadenaAleatoria(15);
-
-    this.firestore.createDoc(usuarios,path,id)
-
-    this.navCtrl.navigateRoot('home');
-
-
   }
+
+
+
+
+
+
 
 }

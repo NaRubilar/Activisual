@@ -1,0 +1,31 @@
+page-home {
+    .logo-container {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+
+    ion-button {
+      margin-top: 30px;
+      font-weight: bold;
+    }
+}
+
+.card {
+    width: 43vh; /* Establece el ancho inicial de la tarjeta */
+    max-width: 600px; /* Establece el ancho máximo para evitar que la tarjeta se vuelva demasiado ancha en pantallas grandes */
+    height: 80vh; /* Establece la altura deseada para la tarjeta grande */
+    margin: auto;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out; /*width 0.5s ease-in-out*/
+}
+
+.card:hover {
+height: 90vh; /* Cambia la altura al pasar el ratón sobre la tarjeta */
+/*width: 95%; /* Cambia el ancho al pasar el ratón sobre la tarjeta */
+}

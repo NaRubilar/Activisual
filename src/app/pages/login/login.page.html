@@ -18,12 +18,32 @@
 
     <form [formGroup]="formularioLogin" >
 
-      <ion-input label="Ingrese Usuario" label-placement="floating" fill="outline" placeholder="Usuario" formControlName="usuario"></ion-input>
+      <!--Correo-->
+      <ion-input label="Ingrese Correo" type="email" label-placement="floating" fill="outline" placeholder="Correo" formControlName="correo"></ion-input>
       <br>
+      <!--
+      <div style="padding-top: -26px;padding-bottom: 16px;" *ngIf="this.formularioLogin.controls?.['correo'].touched && this.formularioLogin.controls?.['correo'].invalid">
+          <ion-text *ngIf="errorControl.email.errors?.required" class="errorInput" color="danger">Se requiere un correo</ion-text>
+          <ion-text *ngIf="errorControl.correo.errors?.['pattern']." class="errorInput" color="danger">Indique una dirección de correo electrónico válida.</ion-text>
+      </div>
+      -->
+
+      <!--Contraseña-->
       <ion-input label="Ingrese Contraseña" type="password" label-placement="floating" fill="outline" placeholder="Contraseña" formControlName="password"></ion-input>
+      <br>
+
+      <!--
+      <div style="padding-top: -26px;padding-bottom: 16px;" *ngIf="this.formularioLogin.controls?.['password'].touched && this.formularioLogin.controls?.['password'].invalid">
+        <ion-text *ngIf="errorControl.password.errors?.required" class="errorInput" color="danger">Se requiere contraseña</ion-text>
+        <ion-text *ngIf="errorControl.password.errors?.['pattern']. class="errorInput"  color="danger">La contraseña Debe contener al menos un carácter</ion-text>
+      </div>
+      -->
+
       <div class="container" style="margin: 0 auto;">
-        <ion-button fill="clear" size="small">¿Olvidaste tu contraseña?</ion-button>
-        &nbsp;&nbsp; <ion-button  size="midium" (click)="ingresar()">Ingresar</ion-button>
+        <ion-button fill="clear" size="small" [routerLink]="['/restablecerpassword']">¿Olvidaste tu contraseña?</ion-button>
+
+        &nbsp;&nbsp; <ion-button type="submit" size="midium" (click)="ingresar()">Ingresar</ion-button>
+
       </div>
 
     </form>

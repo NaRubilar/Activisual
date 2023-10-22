@@ -5,10 +5,8 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
-import { AlertController, NavController } from '@ionic/angular';
-import { Usuarios } from 'src/app/models/models';
-import { FirestoreService } from 'src/app/services/firestore.service';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AlertController, LoadingController, NavController, ToastController } from '@ionic/angular';
+import { AuthService } from '../../services/auth.service';
 
 
 @Component({
@@ -21,13 +19,15 @@ export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
 
   constructor(public fb: FormBuilder,
-              private alertController: AlertController,
               public navCtrl: NavController,
-              private firestore: FirestoreService,
-              private firestoreAuth: AngularFireAuthModule) {
+              private authService: AuthService,
+              private loadingController: LoadingController,
+              private toastController: ToastController,
+              public formBuilder: FormBuilder,
+              public alertController: AlertController) {
 
     this.formularioLogin = this.fb.group({
-      'usuario': new FormControl("",Validators.required),
+      'correo': new FormControl("",Validators.required),
       'password': new FormControl("",Validators.required)
 
     })
@@ -37,50 +37,54 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  /*
-  ingresar() {
-    const credenciales = {
-      email: this.cliente.email,
-      password: this.cliente.celular,
-    };
-    this.firebaseauthService.login(credenciales.email, credenciales.password).then( res => {
-         console.log('ingreso con exito');
-    });
- }
 
+  async ingresar() {
+    const loading = await this.loadingController.create();
+    await loading.present();
+    if (this.formularioLogin.valid) {
 
-  async ingresar(){
-    var f = this.formularioLogin.value;
+      const user = await this.authService.login(this.formularioLogin.value.correo, this.formularioLogin.value.password).catch((err) => {
+        this.presentToast(err)
+        console.log(err);
+        loading.dismiss();
+      })
 
-    //comentario//
-    const user: Usuarios = {
-    usuario: "",
-    correo: "",
-    password: "",
-    repetirPassword: ""
-    }
-    
-
-    
-    let usuarios:  Usuarios []= []
-    usuarios = this.firestore.getCollection('Usuarios')
-
-    if(this.usuarios.usuario == f.usuario && usuarios.password == f.password){
-      console.log('Ingresado');
-      localStorage.setItem('Ingresado','true');
-      this.navCtrl.navigateRoot('home');
-    }else{
+      if (user) {
+        loading.dismiss();
+        console.log('Ingresado');
+        localStorage.setItem('Ingresado','true');
+        this.navCtrl.navigateRoot('home');
+      }
+    } else {
+      loading.dismiss();
       const alert = await this.alertController.create({
-        message: 'Los datos ingresados no son correctos',
-        buttons: ['Aceptar']
+        header: 'Datos sin ingresar',
+        message: 'Porfavor, Ingrese los datos correspondientes',
+        buttons: ['OK']
+      });
+      await alert.present();
+
+      return console.log('Porfavor, Ingrese los datos correspondientes');
+    }
+
+    }
+    get errorControl() {
+      return this.formularioLogin.controls;
+    }
+
+    async presentToast(message: undefined) {
+      console.log(message);
+
+      const toast = await this.alertController.create({
+        header: '',
+        message: 'Los datos que ingreso no son los correctos',
+        buttons: ['Volver a intentar']
       });
 
-      await alert.present();
+      await toast.present();
     }
 
 
-
-  }*/
-
 }
+
 

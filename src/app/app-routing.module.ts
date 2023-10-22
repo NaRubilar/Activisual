@@ -11,9 +11,52 @@ const routes: Routes = [
   },
   {
     path: '',
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'nosotros',
     redirectTo: 'nosotros',
     pathMatch: 'full'
   },
+
+  {
+    path: 'login',
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'registro',
+    redirectTo: 'registro',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'restablecerpassword',
+    redirectTo: 'restablecerpassword',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'galeriafotos',
+    redirectTo: 'galeriafotos',
+    pathMatch: 'full'
+  },
+
+  {
+    path: 'inicio',
+    redirectTo: 'inicio',
+    pathMatch: 'full'
+  },
+
+  {
+    path: '**',
+    redirectTo: 'notfoundpage',
+    pathMatch: 'full'
+  },
+
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then( m => m.LoginPageModule),
@@ -29,9 +72,27 @@ const routes: Routes = [
     canActivate: [NoIngresadoGuard]
   },
   {
-    path: 'pruebas',
-    loadChildren: () => import('./pages/pruebas/pruebas.module').then( m => m.PruebasPageModule)
+    path: 'restablecerpassword',
+    loadChildren: () => import('./pages/restablecerpassword/restablecerpassword.module').then( m => m.RestablecerpasswordPageModule)
   },
+  {
+    path: 'notfoundpage',
+    loadChildren: () => import('./pages/notfoundpage/notfoundpage.module').then( m => m.NotfoundpagePageModule)
+  },
+  {
+    path: 'galeriafotos',
+    loadChildren: () => import('./pages/galeriafotos/galeriafotos.module').then( m => m.GaleriafotosPageModule)
+  },
+  {
+    path: 'inicio',
+    loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
+  },
+
+
+
+
+
+
 
 ];
 
