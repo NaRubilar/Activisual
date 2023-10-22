@@ -15,17 +15,38 @@ page-home {
     }
 }
 
-.card {
-    width: 43vh; /* Establece el ancho inicial de la tarjeta */
-    max-width: 600px; /* Establece el ancho máximo para evitar que la tarjeta se vuelva demasiado ancha en pantallas grandes */
-    height: 80vh; /* Establece la altura deseada para la tarjeta grande */
-    margin: auto;
-    border-radius: 15px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-    transition: height 0.5s ease-in-out, width 0.5s ease-in-out; /*width 0.5s ease-in-out*/
+
+
+
+
+
+.card-container {
+  //display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  padding: 3%;
+  margin-top: 30%;
+
 }
 
-.card:hover {
-height: 90vh; /* Cambia la altura al pasar el ratón sobre la tarjeta */
-/*width: 95%; /* Cambia el ancho al pasar el ratón sobre la tarjeta */
+.button-container {
+  margin-top: 20px;
+  position: flex;
+  top: 90%;
+}
+
+.center-button {
+  width: 90%; /* Ancho del botón */
+  max-width: 200px; /* Máximo ancho del botón */
+
+}
+
+.ion-padding {
+  height: 100vh; /* suponiendo que quieres centrar respecto a todo el alto de la pantalla */
+  width: 100%;
+  display: flex; /* propiedad flexbox */
+  justify-content: center; /* centra el contenido horizontalmmente */
+  align-items: center; /* centra el contenido verticalmente */
 }

@@ -45,7 +45,7 @@ export class RegistroPage implements OnInit {
         console.log(err);
         loading.dismiss();
       })
-      
+
       if (this.formularioReg.controls['password'].value != this.formularioReg.controls['repetirPassword'].value){
           const alert = await this.alertController.create({
             header: 'Contraseñas no coinciden',
@@ -55,7 +55,7 @@ export class RegistroPage implements OnInit {
         await loading.dismiss();
         await alert.present();
         this.navCtrl.navigateRoot('registro')
-        
+
       }else if(user) {
         loading.dismiss();
         console.log("Usuario Creado")

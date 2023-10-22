@@ -7,15 +7,22 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-card class="ion-text-center">
-    <ion-row>
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center ">
+  <ion-card class="card-container ion-text-center">
+    <br>
+    <ion-card-header>
+      <div>
+        <ion-card-title class="ion-text-center">Bienvenido Usuario</ion-card-title>
+      </div>
+    </ion-card-header>
+    <ion-card-content>
       <div class="logo-container">
         <ion-img src="assets/img/valorada.png"></ion-img>
       </div>
-      <div>
-        <ion-button class="ion-text-center" expand="full" color="secondary" shape="round" routerLink="/nosotros">Ir a Nosotros</ion-button>
+      <br>
+      <div class="button-container">
+        <ion-button class="ion-align-items-center" expand="full" color="primary" shape="round" routerLink="/nosotros">Ir a Nosotros</ion-button>
       </div>
-    </ion-row>
+    </ion-card-content>
   </ion-card>
 </ion-content>
