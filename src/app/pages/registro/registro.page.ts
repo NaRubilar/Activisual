@@ -27,9 +27,9 @@ export class RegistroPage implements OnInit {
 
     this.formularioReg = this.fb.group({
       'usuario': new FormControl("",Validators.required),
-      'correo': new FormControl("",Validators.required),
-      'password': new FormControl("",Validators.required),
-      'repetirPassword': new FormControl("",Validators.required)
+      'correo': new FormControl("",Validators.email),
+      'password': new FormControl("",Validators.minLength(6)),
+      'repetirPassword': new FormControl("",Validators.minLength(6))
 
     });
   }
@@ -45,8 +45,18 @@ export class RegistroPage implements OnInit {
         console.log(err);
         loading.dismiss();
       })
-
-      if (user) {
+      
+      if (this.formularioReg.controls['password'].value != this.formularioReg.controls['repetirPassword'].value){
+          const alert = await this.alertController.create({
+            header: 'Contraseñas no coinciden',
+            message: 'Porfavor, Ingrese las mismas contraseñas',
+            buttons: ['OK']
+        })
+        await loading.dismiss();
+        await alert.present();
+        this.navCtrl.navigateRoot('registro')
+        
+      }else if(user) {
         loading.dismiss();
         console.log("Usuario Creado")
         this.navCtrl.navigateRoot('home');
@@ -54,8 +64,8 @@ export class RegistroPage implements OnInit {
     } else {
       await loading.dismiss();
       const alert = await this.alertController.create({
-        header: 'Datos sin ingresar',
-        message: 'Porfavor, Ingrese los datos correspondientes',
+        header: 'Datos incorrectos',
+        message: 'Porfavor, Ingrese todos los datos correspondientes!!!',
         buttons: ['OK']
       });
       await alert.present();

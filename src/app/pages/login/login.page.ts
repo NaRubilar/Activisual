@@ -27,7 +27,7 @@ export class LoginPage implements OnInit {
               public alertController: AlertController) {
 
     this.formularioLogin = this.fb.group({
-      'correo': new FormControl("",Validators.required),
+      'correo': new FormControl("",Validators.email),
       'password': new FormControl("",Validators.required)
 
     })
