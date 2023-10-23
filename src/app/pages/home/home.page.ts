@@ -100,6 +100,7 @@ export class HomePage {
       directory: Directory.Documents,
     });
     console.log("Foto guardada");
+    this.navCtrl.navigateRoot('home');
   }
 
   getFotos() {
