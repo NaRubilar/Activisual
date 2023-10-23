@@ -34,7 +34,7 @@ export class HomePage {
               private firestore: FirestoreService,
               private router: Router) {}
 
-  toggleMenu() {}
+  //toggleMenu() {}
 
   ngOnInit() {
     this.getFotos();
