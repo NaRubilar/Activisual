@@ -248,6 +248,8 @@
 
       </ion-card>
       <br>
+
+      <!--
       <div>
         <ion-fab slot="fixed" vertical="bottom" horizontal="start">
           <ion-fab-button class="botonFab" >
@@ -260,18 +262,44 @@
             <ion-fab-button>
               <ion-icon name="rocket-outline" size="large"></ion-icon>
             </ion-fab-button>
-             <!--Galeria-->
+             Galeria
             <ion-fab-button>
               <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
             </ion-fab-button>
-            <!--Tomar Fotos-->
+            Tomar Fotos
             <ion-fab-button>
               <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
             </ion-fab-button>
           </ion-fab-list>
         </ion-fab>
       </div>
+    -->
+
     </ion-content>
+      
+    <div>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+        <ion-fab-button class="botonFab" >
+          <ion-icon name="chevron-forward-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="end" style="top:70%;">
+          <ion-fab-button>
+            <ion-icon name="footsteps-outline" size="large"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="rocket-outline" size="large"></ion-icon>
+          </ion-fab-button>
+           <!--Galeria-->
+          <ion-fab-button>
+            <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
+          </ion-fab-button>
+          <!--Tomar Fotos-->
+          <ion-fab-button>
+            <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
 </div>
 
 
