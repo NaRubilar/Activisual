@@ -19,7 +19,7 @@ declare var google: any;
 export class GooglemapsComponent implements OnInit {
 
 
-      // coordenadas cuenca
+      // coordenadas DuocUc Viña
       @Input() position = {  
             lat: -33.033695220947266,
             lng: -71.53321075439453

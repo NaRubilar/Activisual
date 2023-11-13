@@ -47,7 +47,7 @@ export class HomePage {
 
   ngOnInit() {
     this.getFotos();
-    this.addDirection();
+  
   }
 
   //Cerrar Sesión
@@ -153,8 +153,8 @@ export class HomePage {
 
     const ubicacion = this.usuarioMap.ubicacion;
     let positionInput = {  
-      lat: 0,
-      lng: 0,
+      lat: -33.033695220947266,
+      lng: -71.53321075439453,
     };
     if (ubicacion !== null) {
         positionInput = ubicacion; 
@@ -171,9 +171,8 @@ export class HomePage {
     if (data) {
       console.log('data -> ', data);
       this.usuarioMap.ubicacion = data.pos;
-      console.log('this.cliente -> ', this.usuarioMap);
+      console.log('this.usuarioMap -> ', this.usuarioMap);
     }
-
   }
 
 }
