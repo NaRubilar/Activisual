@@ -5,5 +5,8 @@ export interface Usuarios {
     correo: string;
     password: string;
     repetirPassword: string;
+    ubicacion: {
+        lat: number;
+        lng: number;
+    }
 }
-
