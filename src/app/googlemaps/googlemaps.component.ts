@@ -21,8 +21,8 @@ export class GooglemapsComponent implements OnInit {
 
       // coordenadas DuocUc Viña
       @Input() position = {  
-            lat: -33.033695220947266,
-            lng: -71.53321075439453
+            lat: 0,
+            lng: 0
       };
 
       label = {
@@ -129,22 +129,28 @@ export class GooglemapsComponent implements OnInit {
       }
 
       async mylocation() {
-
-      console.log('mylocation() click')
-
-      Geolocation['getCurrentPosition'].then((res) => {
-
-            console.log('mylocation() -> get ', res);
-
-            const position = {
-                  lat: res.coords.latitude,
-                  lng: res.coords.longitude,
+            console.log('mylocation() click');
+        
+            try {
+                const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+                    navigator.geolocation.getCurrentPosition(resolve, reject);
+                });
+        
+                console.log('mylocation() -> get ', position);
+        
+                const markerPosition = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+        
+                this.addMarker(markerPosition);
+            } catch (error) {
+                console.error('Error getting current position:', error);
             }
-            this.addMarker(position);
+        }
+        
 
-      });
-
-      }
+      
 
       aceptar() {
             console.log('click aceptar -> ', this.positionSet);
