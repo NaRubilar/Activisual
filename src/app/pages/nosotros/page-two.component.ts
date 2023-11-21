@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { PageThreeComponent } from './page-three.component';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({ 
   
@@ -30,7 +31,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
                 saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
                 labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
                 <br>
-                <ion-button>GPS</ion-button>
+                <ion-button (click)="permisoGps()">GPS</ion-button>
                 <br>
                 <br>
             <img class="photo" src="assets/img/camera.png" alt="">
@@ -38,7 +39,7 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
                 saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
                 labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
                 <br>
-                <ion-button (click)="permisos()">Camara</ion-button>
+                <ion-button (click)="permisoCamara()">Camara</ion-button>
                 <br>
                 <br>
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
@@ -62,8 +63,14 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 export class PageTwoComponent {
   component = PageThreeComponent;
 
-  permisos(){
+  permisoCamara(){
     Camera.requestPermissions();
+
   }
+
+  permisoGps(){
+    Geolocation.requestPermissions()
+
 }
 
+}

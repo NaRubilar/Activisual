@@ -96,7 +96,7 @@
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-buttons (click)="toggleMenu()">
+        <ion-buttons>
             <ion-icon slot="icon-only" name="menu"></ion-icon>
         </ion-buttons>
       </ion-buttons>
@@ -224,7 +224,7 @@
 
               <ion-card-content>
                 <div class="ion-justify-content-center ion-text-center">
-                    <ion-button fill="clear" shape="round" >
+                    <ion-button  fill="clear" shape="round" >
                       <ion-icon name="heart"></ion-icon>
                     </ion-button>
 
@@ -248,30 +248,32 @@
 
       </ion-card>
       <br>
-      <div>
-        <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-          <ion-fab-button class="botonFab" >
-            <ion-icon name="chevron-forward-circle"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-list side="end" style="top:70%;">
-            <ion-fab-button>
-              <ion-icon name="footsteps-outline" size="large"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-button>
-              <ion-icon name="rocket-outline" size="large"></ion-icon>
-            </ion-fab-button>
-             <!--Galeria-->
-            <ion-fab-button>
-              <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
-            </ion-fab-button>
-            <!--Tomar Fotos-->
-            <ion-fab-button>
-              <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
-            </ion-fab-button>
-          </ion-fab-list>
-        </ion-fab>
-      </div>
+
     </ion-content>
+      
+    <div>
+      <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+        <ion-fab-button class="botonFab" >
+          <ion-icon name="chevron-forward-circle"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="end" style="top:70%;">
+          <ion-fab-button>
+            <ion-icon name="footsteps-outline" size="large"></ion-icon>
+          </ion-fab-button>
+          <ion-fab-button>
+            <ion-icon name="rocket-outline" size="large" (click) = "abrirMapa()"></ion-icon>
+          </ion-fab-button>
+           <!--Galeria-->
+          <ion-fab-button>
+            <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
+          </ion-fab-button>
+          <!--Tomar Fotos-->
+          <ion-fab-button>
+            <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
+          </ion-fab-button>
+        </ion-fab-list>
+      </ion-fab>
+    </div>
 </div>
 
 

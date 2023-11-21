@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { MenuController } from '@ionic/angular';
 import { AlertController, NavController } from '@ionic/angular';
-
+import { Usuarios } from 'src/app/models/models';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
-
+import { MenuController,ModalController  } from '@ionic/angular';
 import { Console } from 'console';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { FirestoreService } from '../../services/firestore.service';
+import { GooglemapsComponent } from '../../googlemaps/googlemaps.component';
 
 @Component({
   selector: 'app-home',
@@ -22,22 +22,32 @@ export class HomePage {
   photos: string[] = [];
   fotoUrl: any;
 
-
+  
   usuario: any;
   imageSource: any;
   storage: any;
+  
+  usuarioMap: Usuarios = {
+  usuario: '',
+  correo: '',
+  password: '',
+  repetirPassword: '',
+  ubicacion: null
+};
 
   constructor(private menuCtrl: MenuController,
               private alertController: AlertController,
               public navCtrl: NavController,
               private authService: AuthService,
               private firestore: FirestoreService,
-              private router: Router) {}
+              private router: Router,
+              private modalController: ModalController) {}
 
-  toggleMenu() {}
+  //toggleMenu() {}
 
   ngOnInit() {
     this.getFotos();
+  
   }
 
   //Cerrar Sesión
@@ -100,6 +110,7 @@ export class HomePage {
       directory: Directory.Documents,
     });
     console.log("Foto guardada");
+    this.navCtrl.navigateRoot('home');
   }
 
   getFotos() {
@@ -136,6 +147,32 @@ export class HomePage {
       })
     });
     console.log("Foto cargada");
+  }
+
+  async abrirMapa() {
+
+    const ubicacion = this.usuarioMap.ubicacion;
+    let positionInput = {  
+      lat: -33.033695220947266,
+      lng: -71.53321075439453,
+    };
+    if (ubicacion !== null) {
+        positionInput = ubicacion; 
+    }
+
+    const modalAdd  = await this.modalController.create({
+      component: GooglemapsComponent,
+      mode: 'ios',
+      componentProps: {position: positionInput}
+    });
+    await modalAdd.present();
+
+    const {data} = await modalAdd.onWillDismiss();
+    if (data) {
+      console.log('data -> ', data);
+      this.usuarioMap.ubicacion = data.pos;
+      console.log('this.usuarioMap -> ', this.usuarioMap);
+    }
   }
 
 }
