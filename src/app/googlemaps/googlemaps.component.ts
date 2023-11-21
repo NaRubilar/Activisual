@@ -72,6 +72,7 @@ export class GooglemapsComponent implements OnInit {
                   zoom: 15,
                   disableDefaultUI: false,
                   clickableIcons: false,
+                  setClickableIcons: true,
             };
 
             this.map = new google.maps.Map(this.divMap.nativeElement, mapOptions);
@@ -79,15 +80,16 @@ export class GooglemapsComponent implements OnInit {
                   map: this.map,
                   animation: google.maps.Animation.DROP,
                   draggable: false,
+                  panTo: latLng
             });
-            this.clickHandleEvent();
+            //this.clickHandleEvent();
             this.infowindow = new google.maps.InfoWindow();
             this.addMarker(position);
             this.setInfoWindow(this.marker, this.label.titulo, this.label.subtitulo);
 
       }
 
-      clickHandleEvent() {
+      /*clickHandleEvent() {
 
             this.map.addListener('click', (event: any) => {
                   const position = {
@@ -98,7 +100,7 @@ export class GooglemapsComponent implements OnInit {
             });
 
       }
-
+      */
 
 
       addMarker(position: any): void {

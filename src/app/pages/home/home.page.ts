@@ -149,7 +149,7 @@ export class HomePage {
     console.log("Foto cargada");
   }
 
-  async addDirection() {
+  async abrirMapa() {
 
     const ubicacion = this.usuarioMap.ubicacion;
     let positionInput = {  
