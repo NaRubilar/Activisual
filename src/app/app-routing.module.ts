@@ -64,7 +64,8 @@ const routes: Routes = [
   },
   {
     path: 'nosotros',
-    loadChildren: () => import('./pages/nosotros/nosotros.module').then( m => m.NosotrosPageModule)
+    loadChildren: () => import('./pages/nosotros/nosotros.module').then( m => m.NosotrosPageModule),
+    canActivate: [NoIngresadoGuard]
   },
   {
     path: 'registro',
@@ -87,13 +88,6 @@ const routes: Routes = [
     path: 'inicio',
     loadChildren: () => import('./pages/inicio/inicio.module').then( m => m.InicioPageModule)
   },
-
-
-
-
-
-
-
 
 ];
 
