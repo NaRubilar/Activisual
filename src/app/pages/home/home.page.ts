@@ -7,8 +7,11 @@ import { MenuController,ModalController  } from '@ionic/angular';
 import { Console } from 'console';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+
 import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsComponent } from '../../googlemaps/googlemaps.component';
+import { FirestorageService } from '../../services/firestorage.service';
+import { MostrarImagenModalComponent } from 'src/app/mostrarImagen/mostrar-imagen-modal/mostrar-imagen-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -19,14 +22,14 @@ import { GooglemapsComponent } from '../../googlemaps/googlemaps.component';
 export class HomePage {
 
   path: string = "TestImages";
-  photos: string[] = [];
   fotoUrl: any;
+  photos: string[] = [];
+  image: any;
 
-  
   usuario: any;
   imageSource: any;
-  storage: any;
-  
+  guardar: any;
+
   usuarioMap: Usuarios = {
   usuario: '',
   correo: '',
@@ -39,7 +42,6 @@ export class HomePage {
               private alertController: AlertController,
               public navCtrl: NavController,
               private authService: AuthService,
-              private firestore: FirestoreService,
               private router: Router,
               private modalController: ModalController) {}
 
@@ -47,7 +49,6 @@ export class HomePage {
 
   ngOnInit() {
     this.getFotos();
-  
   }
 
   //Cerrar Sesión
@@ -71,36 +72,43 @@ export class HomePage {
         }
       ]
     });
-
     await alert.present();
   };
 
 
   //==== Tomar Fotos ====
   async tomarFoto() {
+    try{
         const image = await Camera.getPhoto({
           quality: 50,
-          allowEditing: false,
+          //allowEditing: false,
           resultType: CameraResultType.Uri,
           source: CameraSource.Camera,
           saveToGallery: true
         });
 
-        /*
-        this.router.navigate(['/galeriafotos'], {
-          state: {
-            fotoUrl: image.webPath
-          }
-        });*/
-
         if(image){
-          this.guardarFoto(this.storage.getCollection()); //image.base64String!
+          console.log('image:', image)
+          this.image = image.dataUrl;
+          const blob = this.dataURLtoBlob(image.dataUrl);
+          this.guardarFoto(this.guardar.getCollection()); //image.base64String!
           this.getFotos();
           console.log("Foto sacada");
 
         }
+      } catch (e) {
+        console.log(e)
+      }
   };
 
+  dataURLtoBlob(dataurl: any) {
+    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], {type:mime});
+  }
 
   //==== Guardar Foto ====
   async guardarFoto(photo: string){
@@ -149,15 +157,27 @@ export class HomePage {
     console.log("Foto cargada");
   }
 
+  async mostrarImagen(photo: string) {
+    const modal = await this.modalController.create({
+      component: MostrarImagenModalComponent,
+      componentProps: {
+        imagen: photo,
+      },
+    });
+
+    return await modal.present();
+  }
+
+  //==== Abrir Mapa ====
   async abrirMapa() {
 
     const ubicacion = this.usuarioMap.ubicacion;
-    let positionInput = {  
+    let positionInput = {
       lat: -33.033695220947266,
       lng: -71.53321075439453,
     };
     if (ubicacion !== null) {
-        positionInput = ubicacion; 
+        positionInput = ubicacion;
     }
 
     const modalAdd  = await this.modalController.create({
@@ -176,3 +196,5 @@ export class HomePage {
   }
 
 }
+
+

@@ -10,6 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PageOneComponent } from './pages/nosotros/page-one.component';
 import { PageTwoComponent } from './pages/nosotros/page-two.component';
 import { PageThreeComponent } from './pages/nosotros/page-three.component';
+import { MostrarImagenModalComponent } from 'src/app/mostrarImagen/mostrar-imagen-modal/mostrar-imagen-modal.component';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -19,8 +20,14 @@ import { NotFoundError } from 'rxjs';
 
 
 @NgModule({
-  declarations: [AppComponent, PageOneComponent, PageTwoComponent, PageThreeComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, AngularFireModule.initializeApp(environment.firebaseConfig), AngularFireAuthModule, AngularFirestoreModule],
+  declarations: [AppComponent, PageOneComponent, PageTwoComponent, PageThreeComponent, MostrarImagenModalComponent],
+  imports: [BrowserModule,
+            IonicModule.forRoot(),
+            AppRoutingModule,
+            AngularFireModule.initializeApp(environment.firebaseConfig),
+            AngularFireAuthModule,
+            AngularFirestoreModule,
+            IonicModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

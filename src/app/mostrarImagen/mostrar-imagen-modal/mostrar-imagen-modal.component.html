@@ -1,0 +1,15 @@
+<!-- mostrar-imagen-modal.component.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Imagen</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img [src]="imagen" alt="Image"></ion-img>
+</ion-content>
