@@ -3,6 +3,7 @@ import { Component, OnInit, Input, Renderer2, ElementRef, ViewChild, Inject } fr
 import { GooglemapsService } from './googlemaps.service';
 import { ModalController } from '@ionic/angular';
 import { Plugins } from '@capacitor/core';
+
 const {Geolocation} = Plugins;
 
 
@@ -26,11 +27,7 @@ export class GooglemapsComponent implements OnInit {
             lng: 0
       };
 
-      label = {
-            titulo:'Estas Aquí',
-            subtitulo: 'Desubicado'
-      } 
-
+      
       map: any;
       marker: any;
       markerView: any;
@@ -42,6 +39,7 @@ export class GooglemapsComponent implements OnInit {
       position2: any;
       positionDuoc: any;
       beachFlagMarkerView: any;
+      label: any;
 
       @ViewChild('map') divMap: ElementRef;
 
@@ -54,7 +52,7 @@ export class GooglemapsComponent implements OnInit {
       ngOnInit(): void {
             this.init();
             console.log('position ->', this.position)
-              
+            this.mylocation();  
       }
 
       async init() {
@@ -83,18 +81,26 @@ export class GooglemapsComponent implements OnInit {
             };
            
             this.map = new google.maps.Map(this.divMap.nativeElement, mapOptions);
+
+            this.map.addListener('mapcapabilities_changed', () => {
+                  const mapCapabilities = this.map.getMapCapabilities();
+            });
             
+            this.label = {
+            titulo:'Estas Aquí',
+            subtitulo: 'Desubicado'
+      } 
+
             this.marker = new google.maps.Marker({
                   map: this.map,
                   animation: google.maps.Animation.DROP,
                   draggable: false,
                   panTo: latLng,
                   icon: {
-                        url: 'assets/icon/favicon.png'
+                        url: 'assets/icon/Marker1.png'
 
                         }
             });
-            //this.clickHandleEvent();
             
             this.infowindow = new google.maps.InfoWindow();
             
@@ -104,9 +110,14 @@ export class GooglemapsComponent implements OnInit {
             this.markerView = new google.maps.Marker({
                   map:this.map,
                   position: this.positionDuoc,
+                  icon: {
+                        url: 'assets/icon/marker5.png'
+
+                        }
 
             })
             this.addMarkers(this.positionDuoc)
+            //this.clickHandleEvent(this.markerView)
             
             // Jardin Botanico -33.048674782518226, -71.49779906163025
             this.position1 = {
@@ -119,9 +130,14 @@ export class GooglemapsComponent implements OnInit {
                   animation: google.maps.Animation.DROP,
                   draggable: false,
                   position: this.position1,
+                  icon: {
+                        url: 'assets/icon/marker5.png'
+
+                        }
                 
             })
             this.addMarkers(this.position1)
+            //this.clickHandleEvent(this.marker1)
              
             //Cerro Alegre Valparaiso -33.043806258896325, -71.62657360068589 
             this.position2 = {
@@ -133,23 +149,24 @@ export class GooglemapsComponent implements OnInit {
                   map: this.map,
                   animation: google.maps.Animation.DROP,
                   draggable: false,
-                  position: this.position2
+                  position: this.position2,
+                  icon: {
+                        url: 'assets/icon/marker5.png'
+
+                        }
             });
             this.addMarkers(this.position2)
-                
+            //this.clickHandleEvent(this.marker2)
       }
       
-      clickHandleEvent() {
+      /*clickHandleEvent(mark: any) {
 
-            this.map.addListener('click', (event: any) => {
-                  const position = {
-                        lat: event.latLng.lat(),
-                        lng: event.latLng.lng(),
-                  };
-                  this.addMarker(position);
+            this.marker1.addListener('click', ({ domEvent, latLng }) => {
+                  const { target } = domEvent;
+                  this.setInfoWindow(mark, this.label.titulo, this.label.subtitulo)  
             });
 
-      }
+      }*/
       
       addMarker(position: any): void {
 
@@ -195,8 +212,10 @@ export class GooglemapsComponent implements OnInit {
                                     + subtitulo + '</p>' +
                                     '</div>' +
                                     '</div>';
+            this.infowindow.close();
             this.infowindow.setContent(contentString);
-            this.infowindow.open(this.map, marker);
+            this.infowindow.open(marker.map, marker);
+
 
       }
       
