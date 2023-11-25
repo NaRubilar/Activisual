@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { Usuarios } from 'src/app/models/models';
+import { Usuarios} from 'src/app/models/models';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
 import { MenuController,ModalController  } from '@ionic/angular';
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
 import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsComponent } from '../../googlemaps/googlemaps.component';
 import { FirestorageService } from '../../services/firestorage.service';
-import { MostrarImagenModalComponent } from 'src/app/mostrarImagen/mostrar-imagen-modal/mostrar-imagen-modal.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +23,9 @@ export class HomePage {
 
   path: string = "TestImages";
   fotoUrl: any;
-  photos: string[] = [];
+  photos: String[] = [];
   image: any;
+  imagen: any;
 
   usuario: any;
   imageSource: any;
@@ -43,7 +44,8 @@ export class HomePage {
               public navCtrl: NavController,
               private authService: AuthService,
               private router: Router,
-              private modalController: ModalController) {}
+              private modalController: ModalController,
+              private domSanitizer: DomSanitizer) {}
 
   //toggleMenu() {}
 
@@ -77,38 +79,33 @@ export class HomePage {
 
 
   //==== Tomar Fotos ====
-  async tomarFoto() {
-    try{
-        const image = await Camera.getPhoto({
-          quality: 50,
-          //allowEditing: false,
-          resultType: CameraResultType.Uri,
-          source: CameraSource.Camera,
-          saveToGallery: true
-        });
+  async tomarFoto () {
+    const image = await Camera.getPhoto({
+      quality: 50,
+      //allowEditing: false,
+      resultType: CameraResultType.DataUrl,
+      source: CameraSource.Camera,
+      saveToGallery: true
+    });
 
-        if(image){
-          console.log('image:', image)
-          this.image = image.dataUrl;
-          const blob = this.dataURLtoBlob(image.dataUrl);
-          this.guardarFoto(this.guardar.getCollection()); //image.base64String!
-          this.getFotos();
-          console.log("Foto sacada");
+    if(image){
+      console.log('image:', image)
+      this.guardarFoto(image.dataUrl);
+      //Guardar en tipo dataUrl
+      this.imagen=image.dataUrl;
 
-        }
-      } catch (e) {
-        console.log(e)
-      }
+      //Guardar en tipo base64
+      //this.imageData = image.base64String;
+
+
+
+      this.getFotos();
+      console.log("Foto sacada");
+
+    }
   };
 
-  dataURLtoBlob(dataurl: any) {
-    var arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1],
-        bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new Blob([u8arr], {type:mime});
-  }
+
 
   //==== Guardar Foto ====
   async guardarFoto(photo: string){
@@ -117,6 +114,7 @@ export class HomePage {
       data: photo,
       directory: Directory.Documents,
     });
+    console.log('Respuesta de escritura de archivo:', resp);
     console.log("Foto guardada");
     this.navCtrl.navigateRoot('home');
   }
@@ -128,11 +126,12 @@ export class HomePage {
         directory: Directory.Documents
       }
     ).then(files => {
+      console.log('Archivos:', files);
       this.cargarFotos(files.files);
 
     }).catch(err => {
         console.log(err);
-        console.log("Error");
+        console.error('Error al leer archivos:', err);
         Filesystem.mkdir(
           {
             path: this.path,
@@ -140,7 +139,7 @@ export class HomePage {
           }
         )
       })
-    console.log("Foto consegida (get)");
+      console.log("Foto consegida (get)");
   }
 
   //==== Cargar Fotos ====
@@ -157,16 +156,6 @@ export class HomePage {
     console.log("Foto cargada");
   }
 
-  async mostrarImagen(photo: string) {
-    const modal = await this.modalController.create({
-      component: MostrarImagenModalComponent,
-      componentProps: {
-        imagen: photo,
-      },
-    });
-
-    return await modal.present();
-  }
 
   //==== Abrir Mapa ====
   async abrirMapa() {
