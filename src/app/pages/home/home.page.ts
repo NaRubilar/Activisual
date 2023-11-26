@@ -1,15 +1,17 @@
 import { Component, OnInit, Input, Renderer2, ElementRef, ViewChild, Inject } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { Usuarios } from 'src/app/models/models';
+import { Usuarios} from 'src/app/models/models';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
 import { MenuController,ModalController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+
 import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
+import { FotoService} '../../services/foto.service';
 
 const {Geolocation} = Plugins;
 
@@ -23,8 +25,10 @@ declare var google: any;
 export class HomePage implements OnInit {
 
   path: string = "TestImages";
-  photos: string[] = [];
   fotoUrl: any;
+  photos: String[] = [];
+  image: any;
+  imagen: any;
 
   position = {  
     lat: -33.33333333,
@@ -60,7 +64,6 @@ export class HomePage implements OnInit {
               private alertController: AlertController,
               public navCtrl: NavController,
               private authService: AuthService,
-              private firestore: FirestoreService,
               private router: Router,
               private modalController: ModalController,
               private renderer: Renderer2,
@@ -98,46 +101,12 @@ export class HomePage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   };
 
-
-  //==== Tomar Fotos ====
-  async tomarFoto() {
-        const image = await Camera.getPhoto({
-          quality: 50,
-          allowEditing: false,
-          resultType: CameraResultType.Uri,
-          source: CameraSource.Camera,
-          saveToGallery: true
-        });
-
-        /*
-        this.router.navigate(['/galeriafotos'], {
-          state: {
-            fotoUrl: image.webPath
-          }
-        });*/
-
-        if(image){
-          this.guardarFoto(this.storage.getCollection()); //image.base64String!
-          this.getFotos();
-          console.log("Foto sacada");
-
-        }
-  };
-
-
-  //==== Guardar Foto ====
-  async guardarFoto(photo: string){
-    const resp = await Filesystem.writeFile({
-      path: this.path + '/Test3.jpg',
-      data: photo,
-      directory: Directory.Documents,
-    });
-    console.log("Foto guardada");
-    this.navCtrl.navigateRoot('home');
+  //==== Abrir Mapa ====
+  tomarFoto() {
+    this.fotoService.tomarFoto();
   }
 
   getFotos() {
@@ -273,84 +242,14 @@ export class HomePage implements OnInit {
 
                 }
     });
-    this.addMarkers(this.position2)
+    await modalAdd.present();
 
-    
-}
-
-addMarker(position: any): void {
-
-    let latLng = new google.maps.LatLng(position.lat, position.lng);
-
-    this.marker.setPosition(latLng);
-    this.map.panTo(position);
-    this.positionSet = position;
-
-}
-addMarkers(position: any): void {
-
-    if(position == this.position1){
-
-          let latLng = new google.maps.LatLng(position.lat, position.lng);
-          this.marker1.setPosition(latLng);
-          this.positionSet = position;
-    
-    }else if (position == this.position2) {
-          let latLng = new google.maps.LatLng(position.lat, position.lng)
-          this.marker2.setPosition(latLng);
-          this.positionSet = position;
-   
-    }else if (position == this.positionDuoc) {
-          let latLng = new google.maps.LatLng(position.lat, position.lng)
-          this.markerView.setPosition(latLng);
-          this.positionSet = position;
-
-    }else{
-          console.log('error en esta wea ')
+    const {data} = await modalAdd.onWillDismiss();
+    if (data) {
+      console.log('data -> ', data);
+      this.usuarioMap.ubicacion = data.pos;
+      console.log('this.usuarioMap -> ', this.usuarioMap);
     }
-    
-
-}
-
-
-setInfoWindow(marker: any, titulo: string, subtitulo: string) {
-
-    const contentString  =  '<div id="contentInsideMap">' +
-                            '<div>' +
-                            '</div>' +
-                            '<p style="font-weight: bold; margin-bottom: 5px;">' + titulo + '</p>' +
-                            '<div id="bodyContent">' +
-                            '<p class"normal m-0">'
-                            + subtitulo + '</p>' +
-                            '</div>' +
-                            '</div>';
-    this.infowindow.close();
-    this.infowindow.setContent(contentString);
-    this.infowindow.open(marker.map, marker);
-
-
-}
-
-async mylocation() {
-    console.log('mylocation() click');
-
-    try {
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
-
-        console.log('mylocation() -> get ', position);
-
-        const markerPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-        };
-        this.addMarker(markerPosition);
-        this.map.myLocationEnabled = true;
-    } catch (error) {
-        console.error('Error getting current position:', error);
-    }
-}
-
+  }
 
 }

@@ -84,6 +84,13 @@ export class LoginPage implements OnInit {
       await toast.present();
     }
 
+ /*
+    async signUpWithGoogle(){
+      const user = await this.authService.GoogleAuth().then(()=>{
+        this.navCtrl.navigateRoot('home');
+      })
+    }
+*/
 
 }
 
