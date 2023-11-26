@@ -11,7 +11,7 @@ import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
-import {FirestorageService} from '../../services/firestorage.service'
+import {FotoService} from '../../services/foto.service'
 
 
 const {Geolocation} = Plugins;
@@ -70,7 +70,7 @@ export class HomePage implements OnInit {
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document,
               private googlemapsService: GooglemapsService,
-              private firestorage : FirestorageService
+              private fotoService : FotoService
               ) {}
 
   //toggleMenu() {}
