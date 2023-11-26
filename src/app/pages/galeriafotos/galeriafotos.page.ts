@@ -33,7 +33,12 @@ export class GaleriafotosPage implements OnInit {
     });
   }
 
-
+  // Muestra la foto en la galería
+  showFoto(photo: string) {
+    // Asigna la foto al elemento ion-img
+    const img = document.querySelector('ion-img');
+    img.src = photo;
+  }
 
 
 }
