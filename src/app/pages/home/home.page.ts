@@ -12,6 +12,7 @@ import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsComponent } from '../../googlemaps/googlemaps.component';
 import { FirestorageService } from '../../services/firestorage.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { FotoService } from '../../services/foto.service';
 
 @Component({
   selector: 'app-home',
@@ -45,12 +46,19 @@ export class HomePage {
               private authService: AuthService,
               private router: Router,
               private modalController: ModalController,
-              private domSanitizer: DomSanitizer) {}
+              private domSanitizer: DomSanitizer,
+              private fotoService :FotoService ) {}
 
   //toggleMenu() {}
 
   ngOnInit() {
-    this.getFotos();
+    this.fotoService.getFotos();
+
+    // Escuchar el evento de foto guardada
+    this.fotoService.fotoGuardada.subscribe((dataUrl: string) => {
+      // Actualizar la galería con la nueva foto
+      this.photos.unshift(dataUrl); // Agrega la nueva foto al principio de la lista
+    });
   }
 
   //Cerrar Sesión
@@ -77,83 +85,9 @@ export class HomePage {
     await alert.present();
   };
 
-
-  //==== Tomar Fotos ====
-  async tomarFoto () {
-    const image = await Camera.getPhoto({
-      quality: 50,
-      //allowEditing: false,
-      resultType: CameraResultType.DataUrl,
-      source: CameraSource.Camera,
-      saveToGallery: true
-    });
-
-    if(image){
-      console.log('image:', image)
-      this.guardarFoto(image.dataUrl);
-      //Guardar en tipo dataUrl
-      this.imagen=image.dataUrl;
-
-      //Guardar en tipo base64
-      //this.imageData = image.base64String;
-
-
-
-      this.getFotos();
-      console.log("Foto sacada");
-
-    }
-  };
-
-
-
-  //==== Guardar Foto ====
-  async guardarFoto(photo: string){
-    const resp = await Filesystem.writeFile({
-      path: this.path + '/Test3.jpg',
-      data: photo,
-      directory: Directory.Documents,
-    });
-    console.log('Respuesta de escritura de archivo:', resp);
-    console.log("Foto guardada");
-    this.navCtrl.navigateRoot('home');
-  }
-
-  getFotos() {
-    Filesystem.readdir(
-      {
-        path: this.path,
-        directory: Directory.Documents
-      }
-    ).then(files => {
-      console.log('Archivos:', files);
-      this.cargarFotos(files.files);
-
-    }).catch(err => {
-        console.log(err);
-        console.error('Error al leer archivos:', err);
-        Filesystem.mkdir(
-          {
-            path: this.path,
-            directory: Directory.Documents
-          }
-        )
-      })
-      console.log("Foto consegida (get)");
-  }
-
-  //==== Cargar Fotos ====
-  cargarFotos(photos: FileInfo[]) {
-    photos.forEach(file => {
-
-      Filesystem.readFile({
-        path: `${this.path}/${file.name}`,
-        directory: Directory.Documents
-      }).then(photo => {
-        this.photos.push('data:image/jpeg;base64,' + photo.data);
-      })
-    });
-    console.log("Foto cargada");
+  //==== Abrir Mapa ====
+  tomarFoto() {
+    this.fotoService.tomarFoto();
   }
 
 

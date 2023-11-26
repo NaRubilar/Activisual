@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ActivatedRoute } from '@angular/router';
 import { FirestoreService } from '../../services/firestore.service';
+import { FotoService } from '../../services/foto.service';
 
 
 @Component({
@@ -11,18 +12,27 @@ import { FirestoreService } from '../../services/firestore.service';
 })
 export class GaleriafotosPage implements OnInit {
   fotoUrl: string | null;
+  photos: String[] = [];
 
   constructor(
     private firestore: FirestoreService,
-    private route: ActivatedRoute) {
-      this.fotoUrl = this.route.snapshot.paramMap.get('fotoUrl');
+    private route: ActivatedRoute,
+    private fotoService :FotoService ) {
+
 
     }
 
 
 
   ngOnInit() {
+    this.fotoService.getFotos(); // Llama a la función para cargar las fotos al inicializar la página
+
+    // Escucha el evento de foto guardada para actualizar la galería
+    this.fotoService.fotoGuardada.subscribe((dataUrl: string) => {
+      this.photos.unshift(dataUrl); // Agrega la nueva foto al principio de la lista
+    });
   }
+
 
 
 
