@@ -108,7 +108,7 @@ export class HomePage implements OnInit {
     await alert.present();
   };
 
-  //==== Abrir Mapa ====
+  //==== Tomar foto====
   tomarFoto() {
     this.fotoService.tomarFoto();
   }
