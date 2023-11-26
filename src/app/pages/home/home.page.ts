@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Renderer2, ElementRef, ViewChild, Inject } fr
 import { AlertController, NavController } from '@ionic/angular';
 import { Usuarios} from 'src/app/models/models';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
+import { Directory, FileInfo, Filesystem,Encoding, ReaddirResult, FilesystemPlugin } from '@capacitor/filesystem';
 import { MenuController,ModalController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
@@ -11,6 +11,8 @@ import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
+import {FirestorageService} from '../../services/firestorage.service'
+
 
 const {Geolocation} = Plugins;
 
@@ -67,15 +69,19 @@ export class HomePage implements OnInit {
               private modalController: ModalController,
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document,
-              private googlemapsService: GooglemapsService,) {}
+              private googlemapsService: GooglemapsService,
+              private firestorage : FirestorageService
+              ) {}
 
   //toggleMenu() {}
 
-  ngOnInit() {
-    this.init();
-    console.log('position ->', this.position)
-    this.mylocation();
+// Almacena la imagen en una variable tipo File
 
+  ngOnInit() {
+    
+    this.init();
+    this.mylocation();  
+    console.log('position ->', this.position)
   }
 
   //Cerrar Sesión
@@ -201,6 +207,7 @@ export class HomePage implements OnInit {
 
                 }
     });
+
     await modalAdd.present();
 
     const {data} = await modalAdd.onWillDismiss();
