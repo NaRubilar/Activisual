@@ -11,7 +11,6 @@ import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
-import { FotoService} '../../services/foto.service';
 
 const {Geolocation} = Plugins;
 
@@ -30,7 +29,7 @@ export class HomePage implements OnInit {
   image: any;
   imagen: any;
 
-  position = {  
+  position = {
     lat: -33.33333333,
     lng: -71.0264333333
 };
@@ -49,7 +48,7 @@ export class HomePage implements OnInit {
   positionDuoc: any;
   beachFlagMarkerView: any;
   label: any;
-  
+
   usuarioMap: Usuarios = {
   usuario: '',
   correo: '',
@@ -75,9 +74,8 @@ export class HomePage implements OnInit {
   ngOnInit() {
     this.init();
     console.log('position ->', this.position)
-    this.mylocation();  
-    this.getFotos();
-  
+    this.mylocation();
+
   }
 
   //Cerrar Sesión
@@ -109,48 +107,11 @@ export class HomePage implements OnInit {
     this.fotoService.tomarFoto();
   }
 
-  getFotos() {
-    Filesystem.readdir(
-      {
-        path: this.path,
-        directory: Directory.Documents
-      }
-    ).then(files => {
-      this.cargarFotos(files.files);
-
-    }).catch(err => {
-        console.log(err);
-        console.log("Error");
-        Filesystem.mkdir(
-          {
-            path: this.path,
-            directory: Directory.Documents
-          }
-        )
-      })
-    console.log("Foto consegida (get)");
-  }
-
-  //==== Cargar Fotos ====
-  cargarFotos(photos: FileInfo[]) {
-    photos.forEach(file => {
-
-      Filesystem.readFile({
-        path: `${this.path}/${file.name}`,
-        directory: Directory.Documents
-      }).then(photo => {
-        this.photos.push('data:image/jpeg;base64,' + photo.data);
-      })
-    });
-    console.log("Foto cargada");
-  }
-  
-  
   async init() {
 
     this.googlemapsService.init(this.renderer, this.document).then( () => {
           this.initMap();
-    }).catch( (err) => {    
+    }).catch( (err) => {
           console.log(err);
     });
   }
@@ -167,18 +128,17 @@ export class HomePage implements OnInit {
           clickableIcons: false,
           setClickableIcons: true,
     };
-   
+
     this.map = new google.maps.Map(this.divMap.nativeElement, mapOptions);
 
     this.map.addListener('mapcapabilities_changed', () => {
           const mapCapabilities = this.map.getMapCapabilities();
     });
-    
+
     this.label = {
     titulo:'Estas Aquí',
     subtitulo: 'Desubicado'
-} 
-    
+}
     this.marker = new google.maps.Marker({
           map: this.map,
           animation: google.maps.Animation.DROP,
@@ -189,12 +149,11 @@ export class HomePage implements OnInit {
 
                 }
     });
-    
+
     this.infowindow = new google.maps.InfoWindow();
-    
+
     this.addMarker(this.position);
-    
-    
+
     this.markerView = new google.maps.Marker({
           map:this.map,
           position: this.positionDuoc,
@@ -205,7 +164,7 @@ export class HomePage implements OnInit {
 
     })
     this.addMarkers(this.positionDuoc)
-    
+
     // Jardin Botanico -33.048674782518226, -71.49779906163025
     this.position1 = {
           lat: -33.048674782518226,
@@ -222,16 +181,16 @@ export class HomePage implements OnInit {
                 url: 'assets/icon/marker5.png'
 
                 }
-        
+
     })
     this.addMarkers(this.position1)
-     
+
     //Cerro Alegre Valparaiso -33.043806258896325, -71.62657360068589 
     this.position2 = {
           lat: -33.043806258896325,
           lng: -71.62657360068589
     };
-    
+
     this.marker2 = new google.maps.Marker({
           map: this.map,
           animation: google.maps.Animation.DROP,
