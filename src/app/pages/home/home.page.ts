@@ -78,9 +78,9 @@ export class HomePage implements OnInit {
 // Almacena la imagen en una variable tipo File
 
   ngOnInit() {
-    
+
     this.init();
-    this.mylocation();  
+    this.mylocation();
     console.log('position ->', this.position)
   }
 
@@ -207,15 +207,83 @@ export class HomePage implements OnInit {
 
                 }
     });
+    this.addMarkers(this.position2)
 
-    await modalAdd.present();
-
-    const {data} = await modalAdd.onWillDismiss();
-    if (data) {
-      console.log('data -> ', data);
-      this.usuarioMap.ubicacion = data.pos;
-      console.log('this.usuarioMap -> ', this.usuarioMap);
-    }
   }
+
+  addMarker(position: any): void {
+
+    let latLng = new google.maps.LatLng(position.lat, position.lng);
+
+    this.marker.setPosition(latLng);
+    this.map.panTo(position);
+    this.positionSet = position;
+
+}
+addMarkers(position: any): void {
+
+    if(position == this.position1){
+
+          let latLng = new google.maps.LatLng(position.lat, position.lng);
+          this.marker1.setPosition(latLng);
+          this.positionSet = position;
+
+    }else if (position == this.position2) {
+          let latLng = new google.maps.LatLng(position.lat, position.lng)
+          this.marker2.setPosition(latLng);
+          this.positionSet = position;
+
+    }else if (position == this.positionDuoc) {
+          let latLng = new google.maps.LatLng(position.lat, position.lng)
+          this.markerView.setPosition(latLng);
+          this.positionSet = position;
+
+    }else{
+          console.log('error en esta wea ')
+    }
+
+
+}
+
+
+setInfoWindow(marker: any, titulo: string, subtitulo: string) {
+
+    const contentString  =  '<div id="contentInsideMap">' +
+                            '<div>' +
+                            '</div>' +
+                            '<p style="font-weight: bold; margin-bottom: 5px;">' + titulo + '</p>' +
+                            '<div id="bodyContent">' +
+                            '<p class"normal m-0">'
+                            + subtitulo + '</p>' +
+                            '</div>' +
+                            '</div>';
+    this.infowindow.close();
+    this.infowindow.setContent(contentString);
+    this.infowindow.open(marker.map, marker);
+
+
+}
+
+async mylocation() {
+    console.log('mylocation() click');
+
+    try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+
+        console.log('mylocation() -> get ', position);
+
+        const markerPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+        };
+        this.addMarker(markerPosition);
+        this.map.myLocationEnabled = true;
+    } catch (error) {
+        console.error('Error getting current position:', error);
+    }
+}
+
 
 }
