@@ -11,21 +11,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
       <ion-card class="big-card">
-        <ion-col size="6" >
-
-          <ion-grid>
+         <ion-grid>
             <ion-row>
               <ion-col *ngFor="let photo of photos">
-                <img src={{photo.url}} />
+                <img src="{{photo.uri}}" />
               </ion-col>
             </ion-row>
           </ion-grid>
-
-        </ion-col>
       </ion-card>
-    </ion-row>
-  </ion-grid>
 </ion-content>
