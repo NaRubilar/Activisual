@@ -127,8 +127,8 @@ export class HomePage implements OnInit {
         });*/
 
         if(image){
-          this.guardarFoto(this.storage.getCollection()); //image.base64String!
-          this.getFotos();
+          //this.guardarFoto(this.storage.getCollection()); //image.base64String!
+          //this.getFotos();
           this.firestorage.uploadImage(image, 'Fotos', 'foto1' ); //image.base64String
           console.log("Foto guardada");
 
