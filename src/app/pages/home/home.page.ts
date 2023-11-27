@@ -13,6 +13,7 @@ import { Plugins } from '@capacitor/core';
 import {FirestorageService} from '../../services/firestorage.service'
 
 
+
 const {Geolocation} = Plugins;
 
 declare var google: any;
@@ -23,7 +24,7 @@ declare var google: any;
 
 })
 export class HomePage implements OnInit {
-
+  imageFile: File;
   path: string = "TestImages";
   photos: string[] = [];
   fotoUrl: any;
@@ -73,19 +74,16 @@ export class HomePage implements OnInit {
 
   //toggleMenu() {}
 
-// Almacena la imagen en una variable tipo File
-
   ngOnInit() {
-    
-    this.init();
-    this.mylocation();  
+    this.init();  
     console.log('position ->', this.position)
-
+    this.firestorage.subirString('vaaamos que se guarda esta cagá')
     
     //this.getFotos();
   
   }
-
+  
+  
   //Cerrar Sesión
   async salir(){
 
@@ -110,7 +108,7 @@ export class HomePage implements OnInit {
 
     await alert.present();
   };
-
+    
   //==== Tomar Fotos ====
   async tomarFoto() {
         const image = await Camera.getPhoto({
@@ -129,7 +127,9 @@ export class HomePage implements OnInit {
         });*/
 
         if(image){
-          this.firestorage.uploadImage(image, 'Duoc', 'foto1' ); //image.base64String
+          this.guardarFoto(this.storage.getCollection()); //image.base64String!
+          this.getFotos();
+          this.firestorage.uploadImage(image, 'Fotos', 'foto1' ); //image.base64String
           console.log("Foto guardada");
 
         }
@@ -229,7 +229,7 @@ export class HomePage implements OnInit {
     });
     
     this.infowindow = new google.maps.InfoWindow();
-    
+    this.mylocation();
     this.addMarker(this.position);
     
     
