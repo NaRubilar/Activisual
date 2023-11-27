@@ -12,6 +12,8 @@ import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
 import {FotoService} from '../../services/foto.service'
+import {FirestorageService} from '../../services/firestorage.service'
+
 
 
 const {Geolocation} = Plugins;
@@ -24,7 +26,7 @@ declare var google: any;
 
 })
 export class HomePage implements OnInit {
-
+  imageFile: File;
   path: string = "TestImages";
   fotoUrl: any;
   photos: String[] = [];
@@ -70,19 +72,22 @@ export class HomePage implements OnInit {
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document,
               private googlemapsService: GooglemapsService,
-              private fotoService : FotoService
+              private fotoService : FotoService,
+              private firestorage: FirestorageService
               ) {}
 
   //toggleMenu() {}
 
-// Almacena la imagen en una variable tipo File
-
   ngOnInit() {
-
-    this.init();
+    this.init();  
     console.log('position ->', this.position)
+    this.firestorage.subirString('vaaamos que se guarda esta cagá')
+    
+    //this.getFotos();
+  
   }
-
+  
+  
   //Cerrar Sesión
   async salir(){
 
@@ -110,8 +115,21 @@ export class HomePage implements OnInit {
   //==== Tomar foto====
   tomarFoto() {
     this.fotoService.tomarFoto();
-  }
+    this.presentToast('Foto guardada')
 
+  }
+  async presentToast(message: string) {
+    console.log(message);
+
+    const toast = await this.alertController.create({
+      header: '',
+      message: 'Se guardó la foto',
+      buttons: ['Continuar']
+    });
+
+    await toast.present();
+  }
+  
   async init() {
 
     this.googlemapsService.init(this.renderer, this.document).then( () => {

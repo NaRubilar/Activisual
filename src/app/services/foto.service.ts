@@ -4,13 +4,13 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
 import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
+import { FirestorageService } from './firestorage.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FotoService {
   fotoGuardada = new EventEmitter<string>();
-  path: string = "TestImages";
   fotoUrl: any;
   photos: String[] = [];
   image: any;
@@ -25,7 +25,8 @@ export class FotoService {
               public navCtrl: NavController,
               private router: Router,
               private modalController: ModalController,
-              private domSanitizer: DomSanitizer) { }
+              private domSanitizer: DomSanitizer,
+              private firestorage: FirestorageService) { }
 
 
   //==== Tomar Fotos ====
@@ -33,19 +34,20 @@ export class FotoService {
     const image = await Camera.getPhoto({
       quality: 90,
       //allowEditing: false,
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
       saveToGallery: true
     });
 
     if(image){
       console.log('image:', image)
-      this.guardarFoto(image.base64String!);
-      this.fotoGuardada.emit(image.base64String);
+      this.firestorage.uploadImage(image,'Fotos.jpg', this.firestorage.generateFilename('Foto', 1))
+      this.guardarFoto(image.dataUrl);
+      this.fotoGuardada.emit(image.dataUrl);
       //Guardar en tipo dataUrl
-      this.imagen=image.base64String;
+      this.imagen=image.dataUrl;
 
-      //Guardar en tipo base64
+      //Guardar en tipo dataUrl
       //this.imageData = image.base64String;
 
 
@@ -56,11 +58,12 @@ export class FotoService {
     }
   };
 
-
+    path: string = "TestImages";
+    nombre: string = this.generateFilename( 'Test',4);
   //==== Guardar Foto ====
   async guardarFoto(photo: string){
     const resp = await Filesystem.writeFile({
-      path: this.path + '/Test3.jpg',
+      path: this.path + '/' + this.nombre + '.jpg' ,
       data: photo,
       directory: Directory.Documents,
     });
@@ -101,12 +104,16 @@ export class FotoService {
         path: `${this.path}/${file.name}`,
         directory: Directory.Documents
       }).then(photo => {
-        this.photos.push('data:image/jpeg;base64,' + photo.data);
+        this.photos.push('data:image/jpeg;dataUrl,' + photo.data);
       })
     });
     console.log("Foto cargada");
   }
-
+  
+  generateFilename(prefix: string, counter: number): string {
+    counter++;
+    return `${prefix}${counter}`;
+  }
 
 }
 
