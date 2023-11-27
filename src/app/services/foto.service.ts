@@ -80,7 +80,6 @@ export class FotoService {
       }
     ).then(files => {
       console.log('Archivos:', files);
-      this.photos = []; // Limpiar la lista antes de cargar las nuevas fotos
       this.cargarFotos(files.files);
 
     }).catch(err => {
@@ -109,7 +108,7 @@ export class FotoService {
     });
     console.log("Foto cargada");
   }
-  
+
   generateFilename(prefix: string, counter: number): string {
     counter++;
     return `${prefix}${counter}`;
