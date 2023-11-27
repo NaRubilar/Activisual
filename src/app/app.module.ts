@@ -18,24 +18,17 @@ import { NotFoundError } from 'rxjs';
 
 
 
-
 @NgModule({
-    declarations: [ AppComponent,
-                    PageOneComponent, 
-                    PageTwoComponent, 
-                    PageThreeComponent ],
-
-    imports: [BrowserModule,
-              IonicModule.forRoot(), 
-              AppRoutingModule, 
-              AngularFireModule.initializeApp(environment.firebaseConfig),
-              AngularFireAuthModule,
-              AngularFirestoreModule],
-
-    providers: [{ provide: RouteReuseStrategy,
-               useClass: IonicRouteStrategy }],            
-               
+  declarations: [AppComponent, PageOneComponent, PageTwoComponent, PageThreeComponent],
+  imports: [BrowserModule,
+            IonicModule.forRoot(),
+            AppRoutingModule,
+            AngularFireModule.initializeApp(environment.firebaseConfig),
+            AngularFireAuthModule,
+            AngularFirestoreModule,
+            IonicModule],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
-
-export class AppModule {}
+export class AppModule {
+}

@@ -10,11 +10,3 @@ export interface Usuarios {
         lng: number;
     }
 }
-
-export interface Foto {
-    nombre: string;
-    path: string;
-    url: string;
-
-
-}

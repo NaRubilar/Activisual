@@ -14,6 +14,7 @@ export class FirestorageService {
   
               ) { }
 
+<<<<<<< HEAD
     
   storage = getStorage();
   refStorage = ref(this.storage, 'Fotos')
@@ -36,6 +37,8 @@ export class FirestorageService {
     uploadString(this.refStoragSting, message).then((snapshot) => {
       console.log('Uploaded a raw string!');
     });
+=======
+>>>>>>> origin/master
 
   }      
 

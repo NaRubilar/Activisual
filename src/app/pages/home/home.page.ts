@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, Renderer2, ElementRef, ViewChild, Inject } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
-import { Usuarios } from 'src/app/models/models';
+import { Usuarios} from 'src/app/models/models';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem,Encoding, ReaddirResult, FilesystemPlugin } from '@capacitor/filesystem';
 import { MenuController,ModalController  } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+
 import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
-import {FirestorageService} from '../../services/firestorage.service'
+import {FotoService} from '../../services/foto.service'
 
 
 
@@ -26,10 +27,12 @@ declare var google: any;
 export class HomePage implements OnInit {
   imageFile: File;
   path: string = "TestImages";
-  photos: string[] = [];
   fotoUrl: any;
+  photos: String[] = [];
+  image: any;
+  imagen: any;
 
-  position = {  
+  position = {
     lat: -33.33333333,
     lng: -71.0264333333
 };
@@ -48,7 +51,7 @@ export class HomePage implements OnInit {
   positionDuoc: any;
   beachFlagMarkerView: any;
   label: any;
-  
+
   usuarioMap: Usuarios = {
   usuario: '',
   correo: '',
@@ -63,13 +66,12 @@ export class HomePage implements OnInit {
               private alertController: AlertController,
               public navCtrl: NavController,
               private authService: AuthService,
-              private firestore: FirestoreService,
               private router: Router,
               private modalController: ModalController,
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document,
               private googlemapsService: GooglemapsService,
-              private firestorage : FirestorageService
+              private fotoService : FotoService
               ) {}
 
   //toggleMenu() {}
@@ -105,90 +107,19 @@ export class HomePage implements OnInit {
         }
       ]
     });
-
     await alert.present();
   };
-    
-  //==== Tomar Fotos ====
-  async tomarFoto() {
-        const image = await Camera.getPhoto({
-          quality: 50,
-          allowEditing: false,
-          resultType: CameraResultType.Uri,
-          source: CameraSource.Camera,
-          saveToGallery: false
-        });
 
-        /*
-        this.router.navigate(['/galeriafotos'], {
-          state: {
-            fotoUrl: image.webPath
-          }
-        });*/
-
-        if(image){
-          //this.guardarFoto(this.storage.getCollection()); //image.base64String!
-          //this.getFotos();
-          this.firestorage.uploadImage(image, 'Fotos', 'foto1' ); //image.base64String
-          console.log("Foto guardada");
-
-        }
-  };
-
-
-  //==== Guardar Foto ====
-  async guardarFoto(photo: string){
-    const resp = await Filesystem.writeFile({
-      path: this.path + '/Test3.jpg',
-      data: photo,
-      directory: Directory.Documents,
-    });
-    console.log("Foto guardada");
-    this.navCtrl.navigateRoot('home');
+  //==== Tomar foto====
+  tomarFoto() {
+    this.fotoService.tomarFoto();
   }
 
-  getFotos() {
-    Filesystem.readdir(
-      {
-        path: this.path,
-        directory: Directory.Documents
-      }
-    ).then(files => {
-      this.cargarFotos(files.files);
-
-    }).catch(err => {
-        console.log(err);
-        console.log("Error");
-        Filesystem.mkdir(
-          {
-            path: this.path,
-            directory: Directory.Documents
-          }
-        )
-      })
-    console.log("Foto consegida (get)");
-  }
-
-  //==== Cargar Fotos ====
-  cargarFotos(photos: FileInfo[]) {
-    photos.forEach(file => {
-
-      Filesystem.readFile({
-        path: `${this.path}/${file.name}`,
-        directory: Directory.Documents
-      }).then(photo => {
-        this.photos.push('data:image/jpeg;base64,' + photo.data);
-      })
-    });
-    console.log("Foto cargada");
-  }
-  
-  
   async init() {
 
     this.googlemapsService.init(this.renderer, this.document).then( () => {
           this.initMap();
-    }).catch( (err) => {    
+    }).catch( (err) => {
           console.log(err);
     });
   }
@@ -205,18 +136,17 @@ export class HomePage implements OnInit {
           clickableIcons: false,
           setClickableIcons: true,
     };
-   
+
     this.map = new google.maps.Map(this.divMap.nativeElement, mapOptions);
 
     this.map.addListener('mapcapabilities_changed', () => {
           const mapCapabilities = this.map.getMapCapabilities();
     });
-    
+
     this.label = {
     titulo:'Estas Aquí',
     subtitulo: 'Desubicado'
-} 
-    
+}
     this.marker = new google.maps.Marker({
           map: this.map,
           animation: google.maps.Animation.DROP,
@@ -227,12 +157,11 @@ export class HomePage implements OnInit {
 
                 }
     });
-    
+
     this.infowindow = new google.maps.InfoWindow();
     this.mylocation();
     this.addMarker(this.position);
-    
-    
+
     this.markerView = new google.maps.Marker({
           map:this.map,
           position: this.positionDuoc,
@@ -243,7 +172,7 @@ export class HomePage implements OnInit {
 
     })
     this.addMarkers(this.positionDuoc)
-    
+
     // Jardin Botanico -33.048674782518226, -71.49779906163025
     this.position1 = {
           lat: -33.048674782518226,
@@ -260,16 +189,16 @@ export class HomePage implements OnInit {
                 url: 'assets/icon/marker5.png'
 
                 }
-        
+
     })
     this.addMarkers(this.position1)
-     
+
     //Cerro Alegre Valparaiso -33.043806258896325, -71.62657360068589 
     this.position2 = {
           lat: -33.043806258896325,
           lng: -71.62657360068589
     };
-    
+
     this.marker2 = new google.maps.Marker({
           map: this.map,
           animation: google.maps.Animation.DROP,
@@ -282,10 +211,9 @@ export class HomePage implements OnInit {
     });
     this.addMarkers(this.position2)
 
-    
-}
+  }
 
-addMarker(position: any): void {
+  addMarker(position: any): void {
 
     let latLng = new google.maps.LatLng(position.lat, position.lng);
 
@@ -301,12 +229,12 @@ addMarkers(position: any): void {
           let latLng = new google.maps.LatLng(position.lat, position.lng);
           this.marker1.setPosition(latLng);
           this.positionSet = position;
-    
+
     }else if (position == this.position2) {
           let latLng = new google.maps.LatLng(position.lat, position.lng)
           this.marker2.setPosition(latLng);
           this.positionSet = position;
-   
+
     }else if (position == this.positionDuoc) {
           let latLng = new google.maps.LatLng(position.lat, position.lng)
           this.markerView.setPosition(latLng);
@@ -315,9 +243,10 @@ addMarkers(position: any): void {
     }else{
           console.log('error en esta wea ')
     }
-    
+
 
 }
+
 
 setInfoWindow(marker: any, titulo: string, subtitulo: string) {
 

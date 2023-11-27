@@ -1,4 +1,24 @@
-<div class=" ion-text-center">
-  <h1 >Not found page</h1>
-  <p >Lo sentimos, la página que buscas no se encuentra disponible.</p>
-  </div>
+
+<ion-content [fullscreen]="true" class="ion-padding ion-text-center ">
+  <ion-card class="card-container ion-text-center">
+    <br>
+    <ion-card-header>
+      <div>
+        <ion-card-title class="ion-text-center titulo">NotFound</ion-card-title>
+      </div>
+
+    </ion-card-header>
+    <ion-card-content>
+      <div class="logo-container">
+        <ion-img src="assets/img/error.png"></ion-img>
+      </div>
+      <br>
+      <div>
+        <p>No se ha encontrado la pagina que ingreso, por favor, escribir correctamente o ingresar a Inicio</p>
+      </div>
+      <div class="button-container">
+        <ion-button class="ion-align-items-center" expand="full" color="primary" shape="round" routerLink="/inicio">Ir a Inicio</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
