@@ -34,7 +34,7 @@ export class FotoService {
     const image = await Camera.getPhoto({
       quality: 90,
       //allowEditing: false,
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.DataUrl,
       source: CameraSource.Camera,
       saveToGallery: true
     });
@@ -43,7 +43,7 @@ export class FotoService {
       console.log('image:', image)
       this.firestorage.uploadImage(image,'Fotos.jpg', this.firestorage.generateFilename('Foto', 1))
       this.guardarFoto(image.dataUrl);
-      this.fotoGuardada.emit(image.base64String);
+      this.fotoGuardada.emit(image.dataUrl);
       //Guardar en tipo dataUrl
       this.imagen=image.dataUrl;
 
@@ -58,11 +58,12 @@ export class FotoService {
     }
   };
 
-    path = this.generateFilename('/Testing/Test',1);
+    path: string = "TestImages";
+    nombre: string = this.generateFilename( 'Test',4);
   //==== Guardar Foto ====
   async guardarFoto(photo: string){
     const resp = await Filesystem.writeFile({
-      path: this.path,
+      path: this.path + '/' + this.nombre + '.jpg' ,
       data: photo,
       directory: Directory.Documents,
     });
@@ -103,7 +104,7 @@ export class FotoService {
         path: `${this.path}/${file.name}`,
         directory: Directory.Documents
       }).then(photo => {
-        this.photos.push('data:image/jpeg;base64,' + photo.data);
+        this.photos.push('data:image/jpeg;dataUrl,' + photo.data);
       })
     });
     console.log("Foto cargada");

@@ -52,7 +52,7 @@ export class FirestorageService {
             buttons: ['Continuar']
           });
     
-          await toast.present();
+          //await toast.present();
         }
   
   }
