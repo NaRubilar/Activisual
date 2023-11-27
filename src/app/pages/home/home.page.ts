@@ -79,15 +79,13 @@ export class HomePage implements OnInit {
   //toggleMenu() {}
 
   ngOnInit() {
-    this.init();  
+    this.init();
     console.log('position ->', this.position)
-    this.firestorage.subirString('vaaamos que se guarda esta cagá')
-    
-    //this.getFotos();
-  
+    this.firestorage.subirString('vaaamos que se guarda esta cosa')
+
   }
-  
-  
+
+
   //Cerrar Sesión
   async salir(){
 
