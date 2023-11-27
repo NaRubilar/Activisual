@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
 import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
+import { FirestorageService } from './firestorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,8 @@ export class FotoService {
               public navCtrl: NavController,
               private router: Router,
               private modalController: ModalController,
-              private domSanitizer: DomSanitizer) { }
+              private domSanitizer: DomSanitizer,
+              private firestorage: FirestorageService) { }
 
 
   //==== Tomar Fotos ====
@@ -40,6 +42,7 @@ export class FotoService {
 
     if(image){
       console.log('image:', image)
+      this.firestorage.uploadImage(image,'Fotos.jpg', this.firestorage.generateFilename('Foto', 1))
       this.guardarFoto(image.base64String!);
       this.fotoGuardada.emit(image.base64String);
       //Guardar en tipo dataUrl

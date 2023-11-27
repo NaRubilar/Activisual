@@ -12,6 +12,7 @@ import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
 import {FotoService} from '../../services/foto.service'
+import {FirestorageService} from '../../services/firestorage.service'
 
 
 
@@ -71,7 +72,8 @@ export class HomePage implements OnInit {
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document,
               private googlemapsService: GooglemapsService,
-              private fotoService : FotoService
+              private fotoService : FotoService,
+              private firestorage: FirestorageService
               ) {}
 
   //toggleMenu() {}
@@ -113,8 +115,21 @@ export class HomePage implements OnInit {
   //==== Tomar foto====
   tomarFoto() {
     this.fotoService.tomarFoto();
-  }
+    this.presentToast('Foto guardada')
 
+  }
+  async presentToast(message: string) {
+    console.log(message);
+
+    const toast = await this.alertController.create({
+      header: '',
+      message: 'Se guardó la foto',
+      buttons: ['Continuar']
+    });
+
+    await toast.present();
+  }
+  
   async init() {
 
     this.googlemapsService.init(this.renderer, this.document).then( () => {

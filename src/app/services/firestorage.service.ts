@@ -12,19 +12,22 @@ export class FirestorageService {
 
   constructor( private alertController : AlertController
   
-              ) { }
+              ) { }  
 
-<<<<<<< HEAD
-    
   storage = getStorage();
   refStorage = ref(this.storage, 'Fotos')
   refStoragSting = ref(this.storage, 'Textos')
 
   message = 'This is my message.';
+
+  generateFilename(prefix: string, counter: number): string {
+    counter++;
+    return `${prefix}${counter}`;
+  }
     
   uploadImage(file: any, path: string, nombre: string){
     
-        const filePath = path + '/' + nombre;
+        const filePath = path;
         const fileRef = ref(this.refStorage,filePath);
         uploadBytes(fileRef, file ).then((snapshot) => {
           const mensaje = "foto guardada"
@@ -37,8 +40,6 @@ export class FirestorageService {
     uploadString(this.refStoragSting, message).then((snapshot) => {
       console.log('Uploaded a raw string!');
     });
-=======
->>>>>>> origin/master
 
   }      
 
