@@ -25,7 +25,7 @@ export class GaleriafotosPage implements OnInit {
 
 
   ngOnInit() {
-    this.fotoService.getFotos(); // Llama a la función para cargar las fotos al inicializar la página
+     const photos = this.fotoService.getFotos(); // Llama a la función para cargar las fotos al inicializar la página
 
     // Escucha el evento de foto guardada para actualizar la galería
     this.fotoService.fotoGuardada.subscribe((dataUrl: string) => {

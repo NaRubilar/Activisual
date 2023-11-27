@@ -11,7 +11,6 @@ import { FirestorageService } from './firestorage.service';
 })
 export class FotoService {
   fotoGuardada = new EventEmitter<string>();
-  path: string = "TestImages";
   fotoUrl: any;
   photos: String[] = [];
   image: any;
@@ -43,12 +42,12 @@ export class FotoService {
     if(image){
       console.log('image:', image)
       this.firestorage.uploadImage(image,'Fotos.jpg', this.firestorage.generateFilename('Foto', 1))
-      this.guardarFoto(image.base64String!);
+      this.guardarFoto(image.dataUrl);
       this.fotoGuardada.emit(image.base64String);
       //Guardar en tipo dataUrl
-      this.imagen=image.base64String;
+      this.imagen=image.dataUrl;
 
-      //Guardar en tipo base64
+      //Guardar en tipo dataUrl
       //this.imageData = image.base64String;
 
 
@@ -59,11 +58,11 @@ export class FotoService {
     }
   };
 
-
+    path = this.generateFilename('/Testing/Test',1);
   //==== Guardar Foto ====
   async guardarFoto(photo: string){
     const resp = await Filesystem.writeFile({
-      path: this.path + '/Test3.jpg',
+      path: this.path,
       data: photo,
       directory: Directory.Documents,
     });
@@ -109,7 +108,11 @@ export class FotoService {
     });
     console.log("Foto cargada");
   }
-
+  
+  generateFilename(prefix: string, counter: number): string {
+    counter++;
+    return `${prefix}${counter}`;
+  }
 
 }
 
