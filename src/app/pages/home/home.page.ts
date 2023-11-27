@@ -80,7 +80,6 @@ export class HomePage implements OnInit {
   ngOnInit() {
 
     this.init();
-    this.mylocation();
     console.log('position ->', this.position)
   }
 
@@ -157,7 +156,7 @@ export class HomePage implements OnInit {
     });
 
     this.infowindow = new google.maps.InfoWindow();
-
+    this.mylocation();
     this.addMarker(this.position);
 
     this.markerView = new google.maps.Marker({
