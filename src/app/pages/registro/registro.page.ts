@@ -74,34 +74,18 @@ export class RegistroPage implements OnInit {
     }
   }
 
-  // Obtener el correo
+  // Obtener el correo - BORRAR
   obtenerCorreo() {
     const correoUsuario = this.formularioReg.value.correo();
     console.log('Correo del usuario:', correoUsuario);
   }
 
-  // Obtener el correo
+  // Obtener el correo - BORRAR
   obtenerNombre() {
     const nomUsuario = this.formularioReg.value.usuario();
     console.log('Nombre de usuario:', nomUsuario);
   }
 
-  //enviarEmail(form: HTMLFormElement): void {
-    /*
-    const formData = new FormData(form);
-    formData.append('service_id', 'Photosight');
-    formData.append('template_id', 'template_t3f0vkg');
-    formData.append('user_id', 'YOUR_PUBLIC_KEY');
-
-    this.emailService.sendEmail(formData).subscribe(
-      () => {
-        alert('Your mail is sent!');
-      },
-      (error) => {
-        alert('Oops... ' + JSON.stringify(error));
-      }
-    );
-  }*/
 
   async enviarEmail() {
     const formData = new FormData();
