@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { GoogleAuthProvider, getAuth, signInWithPopup, } from "firebase/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
+  private apiUrl = 'https://api.emailjs.com/api/v1.0/email/send-form';
 
   constructor(private auth: AngularFireAuth) { }
 
@@ -35,5 +36,11 @@ export class AuthService {
     return this.auth.authState;
   }
 
+  sendEmail(formData: FormData): Promise<Response> {
+    return fetch(this.apiUrl, {
+      method: 'POST',
+      body: formData,
+    });
+  }
 
 }

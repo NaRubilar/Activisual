@@ -39,8 +39,8 @@ export class RegistroPage implements OnInit {
   async guardar(){
     const loading = await this.loadingController.create();
     await loading.present();
-    if (this.formularioReg.valid) {
 
+    if (this.formularioReg.valid) {
       const user = await this.authService.registrar(this.formularioReg.value.correo, this.formularioReg.value.password).catch((err) => {
         console.log(err);
         loading.dismiss();
@@ -57,6 +57,7 @@ export class RegistroPage implements OnInit {
         this.navCtrl.navigateRoot('registro')
 
       }else if(user) {
+        await this.enviarEmail();
         loading.dismiss();
         console.log("Usuario Creado")
         this.navCtrl.navigateRoot('home');
@@ -73,10 +74,55 @@ export class RegistroPage implements OnInit {
     }
   }
 
+  // Obtener el correo
+  obtenerCorreo() {
+    const correoUsuario = this.formularioReg.value.correo();
+    console.log('Correo del usuario:', correoUsuario);
+  }
 
+  // Obtener el correo
+  obtenerNombre() {
+    const nomUsuario = this.formularioReg.value.usuario();
+    console.log('Nombre de usuario:', nomUsuario);
+  }
 
+  //enviarEmail(form: HTMLFormElement): void {
+    /*
+    const formData = new FormData(form);
+    formData.append('service_id', 'Photosight');
+    formData.append('template_id', 'template_t3f0vkg');
+    formData.append('user_id', 'YOUR_PUBLIC_KEY');
 
+    this.emailService.sendEmail(formData).subscribe(
+      () => {
+        alert('Your mail is sent!');
+      },
+      (error) => {
+        alert('Oops... ' + JSON.stringify(error));
+      }
+    );
+  }*/
 
+  async enviarEmail() {
+    const formData = new FormData();
+    formData.append('service_id', 'Photosight');
+    formData.append('template_id', 'template_t3f0vkg');
+    formData.append('user_id', 'R0Ce-MCDIlSP5Vi_e');
 
+    // Añade más campos según tus necesidades
+    formData.append('usuario', this.formularioReg.value.usuario);
+    formData.append('correo', this.formularioReg.value.correo);
+
+    try {
+      const response = await this.authService.sendEmail(formData);
+      if (response.ok) {
+        console.log('Correo enviado con éxito');
+      } else {
+        console.error('Error al enviar el correo. Detalles de la respuesta:', response);
+      }
+    } catch (error) {
+      console.error('Error al enviar el correo. Detalles del error:', error);
+    }
+  }
 
 }
