@@ -1,12 +1,11 @@
-<ion-menu side="start" contentId="main-content">
+<ion-menu side="start" contentId="main">
   <ion-header>
     <ion-toolbar>
-      <ion-title class="ion-text-center">Menu</ion-title>
+      <ion-title>Menú</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <ion-content class="ion-padding">
-
     <!-- Perfil -->
     <ion-item button detail="false">
       <ion-avatar slot="start">
@@ -92,32 +91,40 @@
   </ion-content>
 </ion-menu>
 
-<div class="ion-page" id="main-content">
+<div class="ion-page" id="main">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-buttons>
             <ion-icon slot="icon-only" name="menu"></ion-icon>
-        </ion-buttons>
       </ion-buttons>
       <ion-title>Bienvenido a PhotoSight</ion-title>
     </ion-toolbar>
   </ion-header>
 
-    <ion-content>
+  <ion-content>
 
-    </ion-content>
-    <div>
+    <div #map class="map">
+
+    </div>
+
+    <ion-chip class="miubicacion" (click)="mylocation()">
+      <ion-label class="normal">Mi ubicación actual</ion-label>
+      <ion-icon name="locate" ></ion-icon>
+    </ion-chip>
+
+  </ion-content>
+
+  <div>
       <ion-fab slot="fixed" vertical="bottom" horizontal="start">
         <ion-fab-button class="botonFab" >
           <ion-icon name="chevron-forward-circle"></ion-icon>
         </ion-fab-button>
-        <ion-fab-list side="end" style="top:70%;">
+        <ion-fab-list side="botton" style="top:1%; right:70%;">
           <ion-fab-button>
             <ion-icon name="footsteps-outline" size="large"></ion-icon>
           </ion-fab-button>
           <ion-fab-button>
-            <ion-icon name="rocket-outline" size="large" (click) = "abrirMapa()"></ion-icon>
+            <ion-icon name="rocket-outline" size="large"></ion-icon>
           </ion-fab-button>
            <!--Galeria-->
           <ion-fab-button>
@@ -129,7 +136,7 @@
           </ion-fab-button>
         </ion-fab-list>
       </ion-fab>
-    </div>
+  </div>
 </div>
 
 

@@ -11,25 +11,13 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-grid>
-    <ion-row>
       <ion-card class="big-card">
-        <ion-col size="6" >
-
-          <ion-list *ngFor="let photo of photos">
-            <ion-item>
-              <ion-img src="photo" alt="Foto"></ion-img>
-            </ion-item>
-          </ion-list>
-          <!--
-          <ion-list *ngFor="let photo of photos">
-            <ion-thumbnail slot="start">
-              <img [src]="photo" alt="Foto">
-            </ion-thumbnail>
-          </ion-list>
-          -->
-        </ion-col>
+         <ion-grid>
+            <ion-row>
+              <ion-col *ngFor="let photo of photos">
+                <img src="{{photo.uri}}" />
+              </ion-col>
+            </ion-row>
+          </ion-grid>
       </ion-card>
-    </ion-row>
-  </ion-grid>
 </ion-content>

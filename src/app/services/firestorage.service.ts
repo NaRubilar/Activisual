@@ -1,17 +1,58 @@
+import { getStorage, ref, uploadBytes, uploadString } from "firebase/storage"
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { finalize } from 'rxjs/operators';
+import { AlertController, ToastController } from '@ionic/angular'
+
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirestorageService {
 
-  constructor(public storage: AngularFireStorage) { }
+  constructor( private alertController : AlertController
+  
+              ) { }  
 
+  storage = getStorage();
+  refStorage = ref(this.storage, 'Fotos')
+  refStoragSting = ref(this.storage, 'Textos')
 
+  message = 'This is my message.';
 
+  generateFilename(prefix: string, counter: number): string {
+    counter++;
+    return `${prefix}${counter}`;
+  }
+    
+  uploadImage(file: any, path: string, nombre: string){
+    
+        const filePath = path;
+        const fileRef = ref(this.refStorage,filePath);
+        uploadBytes(fileRef, file ).then((snapshot) => {
+          const mensaje = "foto guardada"
+          this.presentToast(mensaje)
+           
+          });
+        };
+        
+  subirString(message: string){
+    uploadString(this.refStoragSting, message).then((snapshot) => {
+      console.log('Uploaded a raw string!');
+    });
 
+  }      
 
-
-}
+        async presentToast(message: string) {
+          console.log(message);
+    
+          const toast = await this.alertController.create({
+            header: '',
+            message: 'Se guardó la foto',
+            buttons: ['Continuar']
+          });
+    
+          //await toast.present();
+        }
+  
+  }
