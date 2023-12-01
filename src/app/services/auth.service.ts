@@ -14,7 +14,7 @@ export class AuthService {
 
   constructor(private auth: AngularFireAuth) { }
 
-  
+
   app = initializeApp(environment.firebaseConfig);
   login(correo: string, password: string){
     return this.auth.signInWithEmailAndPassword(correo, password);
