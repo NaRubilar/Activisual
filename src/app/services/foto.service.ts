@@ -72,7 +72,6 @@ export class FotoService {
     });
     console.log('Respuesta de escritura de archivo:', resp);
     console.log("Foto guardada");
-    console.log("La foto: ", photo);
     this.navCtrl.navigateRoot('home');
   }
 
