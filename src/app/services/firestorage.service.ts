@@ -4,7 +4,6 @@ import { AlertController, ToastController } from '@ionic/angular'
 
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,19 +14,18 @@ export class FirestorageService {
               ) { }  
 
   storage = getStorage();
-  refStorage = ref(this.storage, 'Fotos')
+  refStorage = ref(this.storage, '')
   refStoragSting = ref(this.storage, 'Textos')
 
   message = 'This is my message.';
 
-  generateFilename(prefix: string, counter: number): string {
+  generateFilename(nombre: string, counter: number): string {
     counter++;
-    return `${prefix}${counter}`;
+    return `${nombre}${counter}`;
   }
     
-  uploadImage(file: any, path: string, nombre: string){
-    
-        const filePath = path;
+  async uploadImage(file: any, path: string, nombre: string){
+        const filePath = path + '/' + nombre + '.jpg' ;
         const fileRef = ref(this.refStorage,filePath);
         uploadBytes(fileRef, file ).then((snapshot) => {
           const mensaje = "foto guardada"
@@ -43,16 +41,18 @@ export class FirestorageService {
 
   }      
 
-        async presentToast(message: string) {
-          console.log(message);
-    
-          const toast = await this.alertController.create({
-            header: '',
-            message: 'Se guardó la foto',
-            buttons: ['Continuar']
-          });
-    
-          //await toast.present();
-        }
+  async presentToast(message: string) {
+    console.log(message);
+
+    const toast = await this.alertController.create({
+      header: '',
+      message: 'Se guardó la foto',
+      buttons: ['Continuar']
+    });
+
+    //await toast.present();
+  }
   
+  
+
   }
