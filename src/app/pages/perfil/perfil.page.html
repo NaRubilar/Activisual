@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil de Usuario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <!-- Foto de perfil con opción de editar -->
+  <ion-avatar class="profile-picture">
+    <img [src]="userProfileImage" alt="Foto de perfil">
+    <ion-icon name="create" class="edit-icon" (click)="editProfilePicture()"></ion-icon>
+  </ion-avatar>
+
+  <!-- Nombre de usuario -->
+  <ion-title class="ion-text-center">{{ userName }}</ion-title>
+
+  <!-- Correo electrónico -->
+  <ion-label>Email:</ion-label>
+  <ion-text>{{ userEmail }}</ion-text>
+
+  <!-- Descripción del usuario -->
+  <ion-label>Descripción:</ion-label>
+  <ion-item *ngIf="!editingDescription">
+    <ion-text>{{ userDescription }}</ion-text>
+    <ion-icon name="create" slot="end" class="edit-icon" (click)="editDescription()"></ion-icon>
+  </ion-item>
+  <ion-item *ngIf="editingDescription">
+    <ion-textarea [(ngModel)]="editedDescription" placeholder="Escribe tu descripción aquí"></ion-textarea>
+    <ion-button expand="full" (click)="saveDescription()">Guardar Descripción</ion-button>
+  </ion-item>
+
+  <!-- Botón para guardar descripción -->
+  <ion-button expand="full" (click)="saveDescription()">Guardar Descripción</ion-button>
+
+  <!-- Contadores de likes y fotos subidas -->
+  <ion-row class="ion-align-items-center counters">
+    <ion-col size="6" class="ion-text-center">
+      <ion-label>Likes</ion-label>
+      <ion-text>{{ likeCount }}</ion-text>
+    </ion-col>
+    <ion-col size="6" class="ion-text-center">
+      <ion-label>Fotos Subidas</ion-label>
+      <ion-text>{{ uploadedPhotoCount }}</ion-text>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

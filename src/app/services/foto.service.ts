@@ -58,43 +58,6 @@ export class FotoService {
     }
 
   }
-
-
-
-
-/*
-  //==== Tomar Fotos ====
-  async tomarFoto () {
-    const image = await Camera.getPhoto({
-      quality: 90,
-      //allowEditing: false,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-
-    });
-
-    if(image){
-      console.log('image:', image)
-      this.firestorage.uploadImage(image,'Fotos.jpg', this.firestorage.generateFilename('Foto', 1))
-      this.guardarFoto(image.dataUrl);
-      this.fotoGuardada.emit(image.dataUrl);
-      //Guardar en tipo dataUrl
-      this.imagen=image.dataUrl;
-
-      //var imageUrl = image.webPath;
-
-
-      //Guardar en tipo dataUrl
-      //this.imageData = image.base64String;
-
-
-
-      this.getFotos();
-      console.log("Foto sacada");
-
-    }
-  };
-*/
     path: string = "TestImages";
     nombre: string = this.generateFilename( 'Test',4);
 
@@ -132,6 +95,7 @@ export class FotoService {
           }
         )
       })
+      console.log("La path: ", this.path);
       console.log("Foto consegida (get)");
   }
 
