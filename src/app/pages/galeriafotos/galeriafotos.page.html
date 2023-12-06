@@ -14,8 +14,8 @@
       <ion-card class="big-card">
          <ion-grid>
             <ion-row>
-              <ion-col *ngFor="let photo of photos">
-                <img src="{{photo.uri}}" />
+              <ion-col size="6" *ngFor="let photo of fotoService.photos; index as position">
+                <ion-img [src]="photo.webviewPath"></ion-img>
               </ion-col>
             </ion-row>
           </ion-grid>

@@ -110,7 +110,7 @@ export class HomePage implements OnInit {
     await alert.present();
   };
 
-  //==== Tomar foto====
+  //==== Tomar foto===
   tomarFoto() {
     this.fotoService.tomarFoto();
     this.presentToast('Foto guardada')
@@ -127,7 +127,8 @@ export class HomePage implements OnInit {
 
     await toast.present();
   }
-  
+
+  // GoogleMaps
   async init() {
 
     this.googlemapsService.init(this.renderer, this.document).then( () => {
@@ -226,6 +227,7 @@ export class HomePage implements OnInit {
 
   }
 
+  //AddMarkers
   addMarker(position: any): void {
 
     let latLng = new google.maps.LatLng(position.lat, position.lng);
@@ -234,34 +236,34 @@ export class HomePage implements OnInit {
     this.map.panTo(position);
     this.positionSet = position;
 
-}
-addMarkers(position: any): void {
+  }
 
-    if(position == this.position1){
+  //AddMarkers
+  addMarkers(position: any): void {
 
-          let latLng = new google.maps.LatLng(position.lat, position.lng);
-          this.marker1.setPosition(latLng);
-          this.positionSet = position;
+      if(position == this.position1){
 
-    }else if (position == this.position2) {
-          let latLng = new google.maps.LatLng(position.lat, position.lng)
-          this.marker2.setPosition(latLng);
-          this.positionSet = position;
+            let latLng = new google.maps.LatLng(position.lat, position.lng);
+            this.marker1.setPosition(latLng);
+            this.positionSet = position;
 
-    }else if (position == this.positionDuoc) {
-          let latLng = new google.maps.LatLng(position.lat, position.lng)
-          this.markerView.setPosition(latLng);
-          this.positionSet = position;
+      }else if (position == this.position2) {
+            let latLng = new google.maps.LatLng(position.lat, position.lng)
+            this.marker2.setPosition(latLng);
+            this.positionSet = position;
 
-    }else{
-          console.log('error en esta wea ')
-    }
+      }else if (position == this.positionDuoc) {
+            let latLng = new google.maps.LatLng(position.lat, position.lng)
+            this.markerView.setPosition(latLng);
+            this.positionSet = position;
 
+      }else{
+            console.log('error en esta wea ')
+      }
+  }
 
-}
-
-
-setInfoWindow(marker: any, titulo: string, subtitulo: string) {
+  //setInfo
+  setInfoWindow(marker: any, titulo: string, subtitulo: string) {
 
     const contentString  =  '<div id="contentInsideMap">' +
                             '<div>' +
@@ -275,30 +277,29 @@ setInfoWindow(marker: any, titulo: string, subtitulo: string) {
     this.infowindow.close();
     this.infowindow.setContent(contentString);
     this.infowindow.open(marker.map, marker);
+  }
 
+  //Ubicación Actual
+  async mylocation() {
+      console.log('mylocation() click');
 
-}
+      try {
+          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+              navigator.geolocation.getCurrentPosition(resolve, reject);
+          });
 
-async mylocation() {
-    console.log('mylocation() click');
+          console.log('mylocation() -> get ', position);
 
-    try {
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-            navigator.geolocation.getCurrentPosition(resolve, reject);
-        });
-
-        console.log('mylocation() -> get ', position);
-
-        const markerPosition = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
-        };
-        this.addMarker(markerPosition);
-        this.map.myLocationEnabled = true;
-    } catch (error) {
-        console.error('Error getting current position:', error);
-    }
-}
+          const markerPosition = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude,
+          };
+          this.addMarker(markerPosition);
+          this.map.myLocationEnabled = true;
+      } catch (error) {
+          console.error('Error getting current position:', error);
+      }
+  }
 
 
 }

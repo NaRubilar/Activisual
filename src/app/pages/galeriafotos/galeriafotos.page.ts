@@ -16,28 +16,12 @@ export class GaleriafotosPage implements OnInit {
   constructor(
     private firestore: FirestoreService,
     private route: ActivatedRoute,
-    private fotoService :FotoService ) {
-
-
+    public fotoService :FotoService ) {
     }
 
-
-
   ngOnInit() {
-    this.photos = this.fotoService.getFotos(); // Llama a la función para cargar las fotos al inicializar la página
-
-    // Escucha el evento de foto guardada para actualizar la galería
-    this.fotoService.fotoGuardada.subscribe((dataUrl: string) => {
-    this.photos.unshift(dataUrl); // Agrega la nueva foto al principio de la lista
-    });
   }
 
-  // Muestra la foto en la galería
-  showFoto(photo: string) {
-    // Asigna la foto al elemento ion-img
-    const img = document.querySelector('ion-img');
-    img.src = photo;
-  }
 
 
 }
