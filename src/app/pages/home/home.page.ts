@@ -1,19 +1,13 @@
 import { Component, OnInit, Input, Renderer2, ElementRef, ViewChild, Inject } from '@angular/core';
 import { AlertController, NavController } from '@ionic/angular';
 import { Usuarios} from 'src/app/models/models';
-import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
-import { Directory, FileInfo, Filesystem,Encoding, ReaddirResult, FilesystemPlugin } from '@capacitor/filesystem';
-import { MenuController,ModalController  } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-
-import { FirestoreService } from '../../services/firestore.service';
 import { GooglemapsService } from '../../services/googlemaps.service';
 import { DOCUMENT } from '@angular/common';
 import { Plugins } from '@capacitor/core';
-import {FotoService} from '../../services/foto.service'
-import {FirestorageService} from '../../services/firestorage.service'
-
+import {FotoService} from '../../services/foto.service';
+import {FirestorageService} from '../../services/firestorage.service';
+import { MenuController } from '@ionic/angular';
 
 
 const {Geolocation} = Plugins;
@@ -63,17 +57,15 @@ export class HomePage implements OnInit {
 
 @ViewChild('map') divMap: ElementRef;
 
-  constructor(private menuCtrl: MenuController,
-              private alertController: AlertController,
+  constructor(private alertController: AlertController,
               public navCtrl: NavController,
               private authService: AuthService,
-              private router: Router,
-              private modalController: ModalController,
               private renderer: Renderer2,
               @Inject(DOCUMENT) private document,
               private googlemapsService: GooglemapsService,
               private fotoService : FotoService,
-              private firestorage: FirestorageService
+              private firestorage: FirestorageService,
+              private menuController :MenuController
               ) {}
 
   //toggleMenu() {}
@@ -85,6 +77,10 @@ export class HomePage implements OnInit {
 
   }
 
+  // Función para abrir el menú
+  openMenu() {
+    this.menuController.open('start'); // 'start' es el nombre del menú lateral (puedes cambiarlo según tu configuración)
+  }
 
   //Cerrar Sesión
   async salir(){

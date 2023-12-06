@@ -1,7 +1,7 @@
-<ion-menu side="start" contentId="main">
-  <ion-header>
+<ion-menu side="start" contentId="main-content">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title>Menú</ion-title>
+      <ion-title>Menú  </ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -11,7 +11,7 @@
       <ion-avatar slot="start">
         <img alt="Silhouette of a person's head" src="assets/img/perfil.png" />
       </ion-avatar>
-      <ion-label>
+      <ion-label [routerLink]="['/perfil']">
         <h3>Gestionar perfil</h3>
         <p>Gestiona tu perfil, actualiza tus datos, revisa datos etc.</p>
       </ion-label>
@@ -91,17 +91,19 @@
   </ion-content>
 </ion-menu>
 
-<div class="ion-page" id="main">
+<div class="ion-page" id="main-content">
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-            <ion-icon slot="icon-only" name="menu"></ion-icon>
+        <ion-button (click)="openMenu()">
+          <ion-icon name="menu"></ion-icon>
+        </ion-button>
       </ion-buttons>
       <ion-title>Bienvenido a PhotoSight</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-content>
+  <ion-content #content scrollY="false">
 
     <div #map class="map">
 
@@ -115,27 +117,27 @@
   </ion-content>
 
   <div>
-      <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-        <ion-fab-button class="botonFab" >
-          <ion-icon name="chevron-forward-circle"></ion-icon>
+    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
+      <ion-fab-button class="botonFab" >
+        <ion-icon name="chevron-forward-circle"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-list side="botton" style="top:1%; right:70%;">
+        <ion-fab-button>
+          <ion-icon name="footsteps-outline" size="large"></ion-icon>
         </ion-fab-button>
-        <ion-fab-list side="botton" style="top:1%; right:70%;">
-          <ion-fab-button>
-            <ion-icon name="footsteps-outline" size="large"></ion-icon>
-          </ion-fab-button>
-          <ion-fab-button>
-            <ion-icon name="rocket-outline" size="large"></ion-icon>
-          </ion-fab-button>
-           <!--Galeria-->
-          <ion-fab-button>
-            <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
-          </ion-fab-button>
-          <!--Tomar Fotos-->
-          <ion-fab-button>
-            <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
-          </ion-fab-button>
-        </ion-fab-list>
-      </ion-fab>
+        <ion-fab-button>
+          <ion-icon name="rocket-outline" size="large"></ion-icon>
+        </ion-fab-button>
+         <!--Galeria-->
+        <ion-fab-button>
+          <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
+        </ion-fab-button>
+        <!--Tomar Fotos-->
+        <ion-fab-button>
+          <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
+        </ion-fab-button>
+      </ion-fab-list>
+    </ion-fab>
   </div>
 </div>
 
