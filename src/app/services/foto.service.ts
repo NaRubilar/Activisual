@@ -5,7 +5,6 @@ import { Camera, CameraResultType, CameraSource, Photo, } from '@capacitor/camer
 import { Directory, FileInfo, Filesystem, Encoding, ReaddirResult } from '@capacitor/filesystem';
 import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { FirestorageService } from './firestorage.service';
-import { File } from '@ionic-native/file/ngx'
 import { StorageReference, getStorage, ref, uploadBytes, uploadString } from "firebase/storage"
 
 @Injectable({

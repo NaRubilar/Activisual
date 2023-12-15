@@ -116,29 +116,25 @@
 
   </ion-content>
 
-  <div>
-    <ion-fab slot="fixed" vertical="bottom" horizontal="start">
-      <ion-fab-button class="botonFab" >
-        <ion-icon name="chevron-forward-circle"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="botton" style="top:1%; right:70%;">
-        <ion-fab-button>
-          <ion-icon name="footsteps-outline" size="large"></ion-icon>
-        </ion-fab-button>
-        <ion-fab-button>
-          <ion-icon name="rocket-outline" size="large"></ion-icon>
-        </ion-fab-button>
-         <!--Galeria-->
-        <ion-fab-button>
-          <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
-        </ion-fab-button>
-        <!--Tomar Fotos-->
-        <ion-fab-button>
-          <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
-        </ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
-  </div>
+  <!-- Footer con botones -->
+  <ion-footer>
+    <ion-toolbar >
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="ion-text-center">
+          <ion-buttons >
+              <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
+          </ion-buttons>
+        </ion-col>
+
+        <ion-col size="6" class="ion-text-center">
+          <ion-buttons >
+              <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
+
+    </ion-toolbar>
+  </ion-footer>
 </div>
 
 
