@@ -321,11 +321,11 @@ async mylocation() {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
         };
-        this.addMarker(markerPosition);
+        this.addMarker(this.positionDuoc);
 
         // Crea un rango zonal
         const circleOptions = {
-          center: markerPosition,
+          center: this.positionDuoc,
           radius: 300,
           fillColor: '#71f4d5',
           fillOpacity: 0.3,
