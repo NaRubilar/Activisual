@@ -34,6 +34,7 @@
     "@capacitor/status-bar": "5.0.6",
     "@googlemaps/js-api-loader": "^1.16.2",
     "@googlemaps/markerclusterer": "^2.5.1",
+    "@ionic-native/file": "^5.36.0",
     "@ionic/angular": "^7.0.0",
     "@ionic/pwa-elements": "^3.2.2",
     "@popperjs/core": "^2.11.8",

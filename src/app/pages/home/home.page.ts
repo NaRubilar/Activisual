@@ -108,8 +108,38 @@ export class HomePage implements OnInit {
 
   //==== Tomar foto===
   tomarFoto() {
-    this.fotoService.tomarFoto();
-    this.presentToast('Foto guardada')
+    const myMarkerPosition = this.marker.getPosition();
+
+// Obtenemos la posición del marcador del punto de foto
+    const puntoFotoPositionDuoc = this.markerView.getPosition();
+    const puntoFotoPosition1 = this.marker1.getPosition()
+    const puntoFotoPosition2 = this.marker2.getPosition()
+
+// Calculamos la distancia entre los dos marcadores
+const distance = google.maps.geometry.spherical.computeDistanceBetween(
+    myMarkerPosition,
+    puntoFotoPositionDuoc);
+const distance2 = google.maps.geometry.spherical.computeDistanceBetween(
+    myMarkerPosition,
+    puntoFotoPosition1);
+      
+const distance3 = google.maps.geometry.spherical.computeDistanceBetween(
+    myMarkerPosition,
+    puntoFotoPosition2); 
+
+
+if (distance <= this.marker.radius || 
+    distance2 <= this.marker.radius ||
+    distance3 <= this.marker.radius ) {
+
+      this.fotoService.tomarFoto();
+      this.presentToast('Foto guardada')
+
+} else {
+  this.presentToast('Necesitas estar a menos de 300 mts de alguno de los puntos de foto para poder tomar una foto')
+}
+
+    
 
   }
   async presentToast(message: string) {
@@ -117,10 +147,9 @@ export class HomePage implements OnInit {
 
     const toast = await this.alertController.create({
       header: '',
-      message: 'Se guardó la foto',
+      message: message,
       buttons: ['Continuar']
     });
-
     await toast.present();
   }
 
@@ -162,12 +191,13 @@ export class HomePage implements OnInit {
           animation: google.maps.Animation.DROP,
           draggable: false,
           panTo: latLng,
+          radius: 300,
           icon: {
                 url: 'assets/icon/Marker1.png'
-
-                }
+                }                
     });
 
+    
     this.infowindow = new google.maps.InfoWindow();
     this.mylocation();
     this.addMarker(this.position);
@@ -273,29 +303,47 @@ export class HomePage implements OnInit {
     this.infowindow.close();
     this.infowindow.setContent(contentString);
     this.infowindow.open(marker.map, marker);
-  }
-
-  //Ubicación Actual
-  async mylocation() {
-      console.log('mylocation() click');
-
-      try {
-          const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-              navigator.geolocation.getCurrentPosition(resolve, reject);
-          });
-
-          console.log('mylocation() -> get ', position);
-
-          const markerPosition = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude,
-          };
-          this.addMarker(markerPosition);
-          this.map.myLocationEnabled = true;
-      } catch (error) {
-          console.error('Error getting current position:', error);
-      }
-  }
 
 
 }
+positionActiva: any;
+async mylocation() {
+    console.log('mylocation() click');
+
+    try {
+        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+            navigator.geolocation.getCurrentPosition(resolve, reject);
+        });
+
+          console.log('mylocation() -> get ', position);
+
+        const markerPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+        };
+        this.addMarker(markerPosition);
+
+        // Crea un rango zonal
+        const circleOptions = {
+          center: markerPosition,
+          radius: 300,
+          fillColor: '#71f4d5',
+          fillOpacity: 0.3,
+          strokeOpacity: 0.5,
+          strokeWeight: 2,
+        };
+
+        // Agrega el rango zonal al mapa
+        const circle = new google.maps.Circle(circleOptions);
+        circle.setMap(this.map);
+
+        this.map.myLocationEnabled = true;
+    } catch (error) {
+        console.error('Error getting current position:', error);
+    }
+
+  }
+
+}
+
+
