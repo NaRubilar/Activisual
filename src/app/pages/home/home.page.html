@@ -116,25 +116,25 @@
 
   </ion-content>
 
-    <!-- Footer con botones -->
-    <ion-footer style="text-align: center;">
-      <ion-toolbar >
-        <ion-row class="ion-align-items-center">
-          <ion-col size="6" class="ion-text-center">
-            <ion-buttons >
-                <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
-            </ion-buttons>
-          </ion-col>
+  <!-- Footer con botones -->
+  <ion-footer>
+    <ion-toolbar >
+      <ion-row class="ion-align-items-center">
+        <ion-col size="6" class="ion-text-center">
+          <ion-buttons >
+              <ion-icon name="person-circle-outline" size="large" [routerLink]="['/galeriafotos']"></ion-icon>
+          </ion-buttons>
+        </ion-col>
 
-          <ion-col size="6" class="ion-text-center">
-            <ion-buttons >
-                <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
-            </ion-buttons>
-          </ion-col>
-        </ion-row>
+        <ion-col size="6" class="ion-text-center">
+          <ion-buttons >
+              <ion-icon name="camera-outline" size="large" (click)="tomarFoto()"></ion-icon>
+          </ion-buttons>
+        </ion-col>
+      </ion-row>
 
-      </ion-toolbar>
-    </ion-footer>
+    </ion-toolbar>
+  </ion-footer>
 </div>
 
 
