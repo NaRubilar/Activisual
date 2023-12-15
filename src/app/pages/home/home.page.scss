@@ -139,3 +139,30 @@ height: 90vh; /* Cambia la altura al pasar el ratón sobre la tarjeta */
   padding-left: 10px;
   padding-right: 10px;
 }
+
+/* Asegúrate de agregar estos estilos en tu archivo .scss correspondiente */
+
+ion-footer {
+  text-align: center;
+}
+
+ion-toolbar .ion-row {
+  width: 100%;
+}
+
+ion-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: hsl(174deg 73% 80% / 0%);
+}
+
+ion-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+ion-icon {
+  font-size: 2rem; /* Ajusta el tamaño del icono según tus preferencias */
+}
