@@ -40,7 +40,7 @@ export class FotoService {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.Base64,
+      resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
       saveToGallery: true
       
@@ -60,7 +60,7 @@ export class FotoService {
       this.imagen=image.dataUrl;
 
       //Guardar en tipo dataUrl
-      const imageData = image.base64String;
+      /*const imageData = image.base64String;
       this.bytes = imageData;
       const largo = this.bytes.length;
       const arr = new Uint8Array(largo);
@@ -74,7 +74,7 @@ export class FotoService {
       const blob = new Blob([arr], { type: 'image/jpg' });
       const fileName = this.firestorage.generateFilename('Foto', 2)
 
-      this.firestorage.uploadImage(blob,'Imagenes', fileName)
+      this.firestorage.uploadImage(blob,'Imagenes', fileName)*/
 
       //this.getFotos();
       //console.log("Foto sacada");
