@@ -21,13 +21,9 @@ import { PageTwoComponent } from './page-two.component';
             <div class="linea"></div>
 
             <ion-card-content >
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
-                saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
-                labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
+                <p>Descubre el mundo a través de tu lente con Photosight, la aplicación creada con pasión por Natalia Rubilar y Diego Isla, fundadores de Activisual. Nosotros, en Activisual, creemos que cada imagen tiene una historia que contar, y Photosight es la herramienta perfecta para que los amantes de la fotografía cuenten sus propias narrativas visuales.</p>
                 <br>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
-                saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
-                labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
+                <p>Únete a la Revolución Visual con Activisual y Photosight. Tu historia visual está a solo un clic de distancia.</p>
 
                 <br>
             <ion-nav-link router-direction="forward" [component]="component">

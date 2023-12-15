@@ -27,22 +27,18 @@ import { Geolocation } from '@capacitor/geolocation';
 
             <ion-card-content >
             <img src="assets/img/mapa.png" alt="">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
-                saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
-                labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
+                <p>El permiso para acceder al GPS es fundamental para potenciar tu experiencia de exploración visual con Photosight. Al permitirnos acceder a tu ubicación, podemos ofrecerte la oportunidad de fotografiar zonas específicas que hemos asignado, guiándote hacia lugares fascinantes y permitiéndote descubrir joyas ocultas.</p>
                 <br>
                 <ion-button (click)="permisoGps()">GPS</ion-button>
                 <br>
                 <br>
             <img class="photo" src="assets/img/camera.png" alt="">
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ea, fugiat reprehenderit,
-                saepe dolorum voluptas repudiandae vel at similique officiis eveniet non quidem exercitationem,
-                labore quos aspernatur in autem modi aliquam! Lorem ipsum dolor</p>
+                <p>Photosight solicita acceso a tu cámara para desatar tu creatividad visual. Permitirnos acceder a tu cámara te brinda la capacidad de capturar momentos preciosos y explorar tu entorno a través de la lente.</p>
                 <br>
                 <ion-button (click)="permisoCamara()">Camara</ion-button>
                 <br>
                 <br>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                <p>Tu capacidad para explorar y documentar el mundo a tu alrededor se amplía, permitiéndote ser parte de la rica narrativa visual que estamos construyendo juntos en Activisual.</p>
                 <br>
 
             <ion-nav-link router-direction="forward" [component]="component">
