@@ -10,7 +10,7 @@ import { CheckboxCustomEvent } from '@ionic/angular';
         <ion-buttons slot="start">
           <ion-back-button></ion-back-button>
         </ion-buttons>
-        <ion-title>Nosotros</ion-title>
+        <ion-title class="ion-text-center" >Nosotros</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -101,7 +101,7 @@ import { CheckboxCustomEvent } from '@ionic/angular';
                           A menos que la ley disponga lo contrario, te enviaremos una notificación (por ejemplo, mediante nuestro Servicio) antes de modificar estas Condiciones, de modo que puedas consultar los cambios antes de que entren en vigor.
                           El uso del Servicio después de esta fecha supondrá la aceptación de las modificaciones efectuadas. Si no quieres aceptar estas disposiciones o las Condiciones actualizadas, puedes eliminar tu cuenta aquí.
                         </p>
-                        <span>Última revisión: 03 de Septiembre de 2023</span>
+                        <span>Última revisión: 14 diciembre de 2023</span>
                         </div>
 
                         <ion-item>
