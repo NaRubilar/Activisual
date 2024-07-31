@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBPIAdk1Ncnm96OzJx0Ulkwxuy38R2o7YE",
+    apiKey: "xxxxxxxxxxxxxx",
     authDomain: "activisual-9de00.firebaseapp.com",
     projectId: "activisual-9de00",
     storageBucket: "gs://activisual-9de00.appspot.com",
